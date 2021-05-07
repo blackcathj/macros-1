@@ -81,12 +81,12 @@ int Fun4All_G4_EICDetector(
   //   Input::SARTRE = true;
 
   // Simple multi particle generator in eta/phi/pt ranges
-  Input::SIMPLE = true;
+  // Input::SIMPLE = true;
   // Input::SIMPLE_NUMBER = 2; // if you need 2 of them
   // Input::SIMPLE_VERBOSITY = 1;
 
   // Particle gun (same particles in always the same direction)
-  // Input::GUN = true;
+  Input::GUN = true;
   // Input::GUN_NUMBER = 3; // if you need 3 of them
   // Input::GUN_VERBOSITY = 0;
 
@@ -159,7 +159,7 @@ int Fun4All_G4_EICDetector(
   // add the settings for other with [1], next with [2]...
   if (Input::GUN)
   {
-    INPUTGENERATOR::Gun[0]->AddParticle("pi-", 0, 1, 0);
+    INPUTGENERATOR::Gun[0]->AddParticle("proton", 25e-3*275, 0, 275);
     INPUTGENERATOR::Gun[0]->set_vtx(0, 0, 0);
   }
   // pythia6
@@ -226,7 +226,7 @@ int Fun4All_G4_EICDetector(
   Enable::DSTOUT_COMPRESS = false;  // Compress DST files
 
   //Option to convert DST to human command readable TTree for quick poke around the outputs
-//  Enable::DSTREADER = true;
+  Enable::DSTREADER = true;
 
   // turn the display on (default off)
   Enable::DISPLAY = false;

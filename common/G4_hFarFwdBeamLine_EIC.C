@@ -68,7 +68,7 @@ void hFarFwdDefineMagnets(PHG4Reco* g4Reco){
     
   // make magnet active volume if you want to study the hits
   bool magnet_active=false;
-  int absorberactive = 0;
+  int absorberactive = 1;
 
   // if you insert numbers it only displays those magnets, do not comment out the set declaration
   set<int> magnetlist;
@@ -165,7 +165,8 @@ void hFarFwdDefineMagnets(PHG4Reco* g4Reco){
 		      bl->set_double_param("inner_radius",inner_radius_zin);
 		      bl->set_double_param("outer_radius", outer_magnet_diameter/2.);
 		      bl->SetActive(magnet_active);
-		      bl->BlackHole();
+		      bl->OverlapCheck( Enable::OVERLAPCHECK );
+		       bl->BlackHole();
 		      if (absorberactive)  
 			{
 			  bl->SetAbsorberActive();
@@ -209,6 +210,7 @@ void hFarFwdDefineDetectorsIP6(PHG4Reco* g4Reco){
   detZDC->set_double_param("size_z",0.1);
   detZDC->set_string_param("material","G4_Si");
   detZDC->SetActive();
+  detZDC->OverlapCheck( Enable::OVERLAPCHECK );
   if(verbosity)
     detZDC->Verbosity(verbosity);
   g4Reco->registerSubsystem(detZDC);
@@ -227,6 +229,7 @@ void hFarFwdDefineDetectorsIP6(PHG4Reco* g4Reco){
     detOM->set_double_param("size_z",0.03);
     detOM->set_string_param("material","G4_Si");
     detOM->SetActive();
+    detOM->OverlapCheck( Enable::OVERLAPCHECK );
     if(verbosity)
       detOM->Verbosity(verbosity);
     g4Reco->registerSubsystem(detOM);
@@ -247,6 +250,7 @@ void hFarFwdDefineDetectorsIP6(PHG4Reco* g4Reco){
     detRP->set_double_param("size_z",0.03);
     detRP->set_string_param("material","G4_Si");
     detRP->SetActive();
+    detRP->OverlapCheck( Enable::OVERLAPCHECK );
     if(verbosity)
       detRP->Verbosity(verbosity);
     g4Reco->registerSubsystem(detRP);
@@ -266,6 +270,7 @@ void hFarFwdDefineDetectorsIP6(PHG4Reco* g4Reco){
     detB0->set_double_param("place_y",0);
     detB0->set_double_param("place_z", (b0Mag_zCent - b0Mag_zLen/2) + b0Mag_zLen/(b0DetNr-1) * i);
     detB0->SetActive(true);
+    detB0->OverlapCheck( Enable::OVERLAPCHECK );
     if(verbosity)
       detB0->Verbosity(verbosity);
     g4Reco->registerSubsystem(detB0);

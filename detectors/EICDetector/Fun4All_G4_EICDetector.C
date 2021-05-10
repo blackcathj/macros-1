@@ -24,9 +24,9 @@
 R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
-    const int nEvents = 2,
+    const int nEvents = 50000,
     const string &inputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffectsAlterBeamEnergy.hepmc",
-    const string &outputFile = "G4EICDetector.root",
+    const string &outputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffectsAlterBeamEnergy.G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const int skip = 0,
     const string &outdir = ".")
@@ -226,7 +226,7 @@ int Fun4All_G4_EICDetector(
   Enable::DSTOUT_COMPRESS = false;  // Compress DST files
 
   //Option to convert DST to human command readable TTree for quick poke around the outputs
-//  Enable::DSTREADER = true;
+  Enable::DSTREADER = true;
 
   // turn the display on (default off)
   Enable::DISPLAY = false;
@@ -245,26 +245,26 @@ int Fun4All_G4_EICDetector(
   // whether to simulate the Be section of the beam pipe
   Enable::PIPE = true;
   // EIC beam pipe extension beyond the Be-section:
-  G4PIPE::use_forward_pipes = true;
+  G4PIPE::use_forward_pipes = false;
   //EIC hadron far forward magnets and detectors. IP6 and IP8 are incompatible (pick either or);
-  Enable::HFARFWD_MAGNETS_IP6=true;
-  Enable::HFARFWD_VIRTUAL_DETECTORS_IP6=true;
+  Enable::HFARFWD_MAGNETS_IP6=false;
+  Enable::HFARFWD_VIRTUAL_DETECTORS_IP6=false;
   Enable::HFARFWD_MAGNETS_IP8=false;
   Enable::HFARFWD_VIRTUAL_DETECTORS_IP8=false;
 
   // gems
-  Enable::EGEM = true;
-  Enable::FGEM = true;
+  Enable::EGEM = false;
+  Enable::FGEM = false;
   Enable::FGEM_ORIG = false; //5 forward gems; cannot be used with FST
   // barrel tracker
   Enable::BARREL = false;
   //G4BARREL::SETTING::BARRELV6=true;
   // fst
-  Enable::FST = true;
+  Enable::FST = false;
   G4FST::SETTING::FST_TPC = true;
   // mvtx/tpc tracker
-  Enable::MVTX = true;
-  Enable::TPC = true;
+  Enable::MVTX = false;
+  Enable::TPC = false;
   //  Enable::TPC_ENDCAP = true;
 
   Enable::TRACKING = true;
@@ -276,23 +276,23 @@ int Fun4All_G4_EICDetector(
   G4TRACKING::PROJECTION_FEMC = false;
   G4TRACKING::PROJECTION_FHCAL = false;
 
-  Enable::CEMC = true;
+  Enable::CEMC = false;
   //  Enable::CEMC_ABSORBER = true;
   Enable::CEMC_CELL = Enable::CEMC && true;
   Enable::CEMC_TOWER = Enable::CEMC_CELL && true;
   Enable::CEMC_CLUSTER = Enable::CEMC_TOWER && true;
   Enable::CEMC_EVAL = Enable::CEMC_CLUSTER && true;
 
-  Enable::HCALIN = true;
+  Enable::HCALIN = false;
   //  Enable::HCALIN_ABSORBER = true;
   Enable::HCALIN_CELL = Enable::HCALIN && true;
   Enable::HCALIN_TOWER = Enable::HCALIN_CELL && true;
   Enable::HCALIN_CLUSTER = Enable::HCALIN_TOWER && true;
   Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
 
-  Enable::MAGNET = true;
+  Enable::MAGNET = false;
 
-  Enable::HCALOUT = true;
+  Enable::HCALOUT = false;
   //  Enable::HCALOUT_ABSORBER = true;
   Enable::HCALOUT_CELL = Enable::HCALOUT && true;
   Enable::HCALOUT_TOWER = Enable::HCALOUT_CELL && true;
@@ -300,42 +300,42 @@ int Fun4All_G4_EICDetector(
   Enable::HCALOUT_EVAL = Enable::HCALOUT_CLUSTER && true;
 
   // EICDetector geometry - barrel
-  Enable::DIRC = true;
+  Enable::DIRC = false;
 
   // EICDetector geometry - 'hadron' direction
-  Enable::RICH = true;
-  Enable::AEROGEL = true;
+  Enable::RICH = false;
+  Enable::AEROGEL = false;
 
-  Enable::FEMC = true;
+  Enable::FEMC = false;
   //  Enable::FEMC_ABSORBER = true;
   Enable::FEMC_TOWER = Enable::FEMC && true;
   Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
   Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
 
-  Enable::FHCAL = true;
+  Enable::FHCAL = false;
   //  Enable::FHCAL_ABSORBER = true;
   Enable::FHCAL_TOWER = Enable::FHCAL && true;
   Enable::FHCAL_CLUSTER = Enable::FHCAL_TOWER && true;
   Enable::FHCAL_EVAL = Enable::FHCAL_CLUSTER && true;
 
   // EICDetector geometry - 'electron' direction
-  Enable::EEMC = true;
+  Enable::EEMC = false;
   Enable::EEMC_TOWER = Enable::EEMC && true;
   Enable::EEMC_CLUSTER = Enable::EEMC_TOWER && true;
   Enable::EEMC_EVAL = Enable::EEMC_CLUSTER && true;
 
-  Enable::PLUGDOOR = true;
+  Enable::PLUGDOOR = false;
 
   // Other options
-  Enable::GLOBAL_RECO = true;
+  Enable::GLOBAL_RECO = false;
   Enable::GLOBAL_FASTSIM = true;
 
   // Select only one jet reconstruction- they currently use the same
   // output collections on the node tree!
-  Enable::JETS = true;
+  Enable::JETS = false;
   Enable::JETS_EVAL = Enable::JETS && true;
 
-  Enable::FWDJETS = true;
+  Enable::FWDJETS = false;
   Enable::FWDJETS_EVAL = Enable::FWDJETS && true;
 
   // new settings using Enable namespace in GlobalVariables.C

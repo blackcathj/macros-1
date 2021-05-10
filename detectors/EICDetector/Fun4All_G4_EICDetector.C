@@ -25,7 +25,7 @@ R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
     const int nEvents = 1,
-    const string &inputFile = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
+    const string &inputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffectsAlterBeamEnergy.hepmc",
     const string &outputFile = "G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const int skip = 0,
@@ -37,7 +37,7 @@ int Fun4All_G4_EICDetector(
   Fun4AllServer *se = Fun4AllServer::instance();
   se->Verbosity(0);
   //Opt to print all random seed used for debugging reproducibility. Comment out to reduce stdout prints.
-  //PHRandomSeed::Verbosity(1);
+  PHRandomSeed::Verbosity(1);
 
   // just if we set some flags somewhere in this macro
   recoConsts *rc = recoConsts::instance();
@@ -81,7 +81,7 @@ int Fun4All_G4_EICDetector(
   //   Input::SARTRE = true;
 
   // Simple multi particle generator in eta/phi/pt ranges
-  Input::SIMPLE = true;
+  // Input::SIMPLE = true;
   // Input::SIMPLE_NUMBER = 2; // if you need 2 of them
   // Input::SIMPLE_VERBOSITY = 1;
 
@@ -102,7 +102,7 @@ int Fun4All_G4_EICDetector(
   INPUTREADEIC::filename = inputFile;
 
   // HepMC2 files
-  //  Input::HEPMC = true;
+  Input::HEPMC = true;
   Input::VERBOSITY = 0;
   INPUTHEPMC::filename = inputFile;
 
@@ -229,7 +229,7 @@ int Fun4All_G4_EICDetector(
 //  Enable::DSTREADER = true;
 
   // turn the display on (default off)
-  Enable::DISPLAY = false;
+  Enable::DISPLAY = true;
 
   //======================
   // What to run
@@ -245,7 +245,7 @@ int Fun4All_G4_EICDetector(
   // whether to simulate the Be section of the beam pipe
   Enable::PIPE = true;
   // EIC beam pipe extension beyond the Be-section:
-  G4PIPE::use_forward_pipes = false;
+  G4PIPE::use_forward_pipes = true;
   //EIC hadron far forward magnets and detectors. IP6 and IP8 are incompatible (pick either or);
   Enable::HFARFWD_MAGNETS_IP6=true;
   Enable::HFARFWD_VIRTUAL_DETECTORS_IP6=true;

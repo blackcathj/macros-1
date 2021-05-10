@@ -120,6 +120,7 @@ namespace Input
       std::cout << "ApplyEICBeamParameter(): Fatal Error - null input pointer HepMCGen" << std::endl;
       exit(1);
     }
+    HepMCGen->PHHepMCGenHelper_Verbosity(1);
 
     //25mrad x-ing as in EIC CDR
     const double EIC_hadron_crossing_angle = 25e-3;

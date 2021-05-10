@@ -35,9 +35,9 @@ int Fun4All_G4_EICDetector(
   // Fun4All server
   //---------------
   Fun4AllServer *se = Fun4AllServer::instance();
-  se->Verbosity(0);
+  se->Verbosity(1);
   //Opt to print all random seed used for debugging reproducibility. Comment out to reduce stdout prints.
-  PHRandomSeed::Verbosity(1);
+  // PHRandomSeed::Verbosity(1);
 
   // just if we set some flags somewhere in this macro
   recoConsts *rc = recoConsts::instance();
@@ -103,7 +103,7 @@ int Fun4All_G4_EICDetector(
 
   // HepMC2 files
   Input::HEPMC = true;
-  Input::VERBOSITY = 0;
+  Input::VERBOSITY = 2;
   INPUTHEPMC::filename = inputFile;
 
   //-----------------

@@ -24,9 +24,9 @@
 R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
-    const int nEvents = 50000,
+    const int nEvents = 1000000,
     const string &inputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffectsAlterBeamEnergy.hepmc",
-    const string &outputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffectsAlterBeamEnergy.G4EICDetector.root",
+    const string &outputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffectsAlterBeamEnergy.G4EICDetector.1000000.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const int skip = 0,
     const string &outdir = ".")

@@ -132,8 +132,8 @@ namespace Input
         0                           // beamB_phi
     );
     HepMCGen->set_beam_angular_divergence_hv(
-        119e-6, 119e-6,  // proton beam divergence horizontal & vertical, as in EIC CDR Table 1.1
-        211e-6, 152e-6   // electron beam divergence horizontal & vertical, as in EIC CDR Table 1.1
+        150e-6, 150e-6,  // proton beam divergence horizontal & vertical, as in EIC CDR Table 3.3
+        202e-6, 187e-6   // electron beam divergence horizontal & vertical, as in EIC CDR Table 3.3
     );
 
     // angular kick within a bunch as result of crab cavity

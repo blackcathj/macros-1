@@ -25,8 +25,8 @@ R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
     const int nEvents = 1000000,
-    const string &inputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffectsAlterBeamEnergy.hepmc",
-    const string &outputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffectsAlterBeamEnergy.G4EICDetector.1000000.root",
+    const string &inputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffects_hiDiv_18x275_25mRad.hepmc",
+    const string &outputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffects_hiDiv_18x275_25mRad.G4EICDetector.CrossDivergenceCrab.1000000.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const int skip = 0,
     const string &outdir = ".")
@@ -103,7 +103,7 @@ int Fun4All_G4_EICDetector(
 
   // HepMC2 files
   Input::HEPMC = true;
-  Input::VERBOSITY = 2;
+  //Input::VERBOSITY = 2;
   INPUTHEPMC::filename = inputFile;
 
   //-----------------

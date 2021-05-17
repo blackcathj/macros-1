@@ -136,14 +136,14 @@ namespace Input
         202e-6, 187e-6   // electron beam divergence horizontal & vertical, as in EIC CDR Table 3.3
     );
 
-    // angular kick within a bunch as result of crab cavity
-    // using an naive assumption of transfer matrix from the cavity to IP,
-    // which is NOT yet validated with accelerator optics simulations!
-    const double z_hadron_cavity = 52e2;  // CDR Fig 3.3
-    const double z_e_cavity = 38e2;       // CDR Fig 3.2
-    HepMCGen->set_beam_angular_z_coefficient_hv(
-        -EIC_hadron_crossing_angle / 2. / z_hadron_cavity, 0,
-        -EIC_hadron_crossing_angle / 2. / z_e_cavity, 0);
+//    // angular kick within a bunch as result of crab cavity
+//    // using an naive assumption of transfer matrix from the cavity to IP,
+//    // which is NOT yet validated with accelerator optics simulations!
+//    const double z_hadron_cavity = 52e2;  // CDR Fig 3.3
+//    const double z_e_cavity = 38e2;       // CDR Fig 3.2
+//    HepMCGen->set_beam_angular_z_coefficient_hv(
+//        -EIC_hadron_crossing_angle / 2. / z_hadron_cavity, 0,
+//        -EIC_hadron_crossing_angle / 2. / z_e_cavity, 0);
 
     // calculate beam sigma width at IP  as in EIC CDR table 1.1
     const double sigma_p_h = sqrt(80 * 11.3e-7);

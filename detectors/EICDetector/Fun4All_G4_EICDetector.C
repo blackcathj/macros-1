@@ -25,12 +25,13 @@ R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
     const int nEvents = 1000000,
-    const string &inputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffects_hiDiv_18x275_25mRad.hepmc",
-    const string &outputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffects_hiDiv_18x275_25mRad.G4EICDetectorLargeVol.CrossDivergence.1000000.root",
+    const string &inputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/headonTestJin/test_headon_25mRad_18x275_v1.hepmc",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const int skip = 0,
     const string &outdir = ".")
 {
+  const string &outputFile = inputFile + ".G4EICDetectorLargeVol.CrossDivergence.root";
+
   //---------------
   // Fun4All server
   //---------------

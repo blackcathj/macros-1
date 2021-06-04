@@ -26,7 +26,7 @@ R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
     const int nEvents = 1,
-    const string &inputFile = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
+    const string &inputFile = "data/sartre_bnonsat_jpsi_Au_coh_mu.root",
     const string &outputFile = "G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const int skip = 0,
@@ -36,7 +36,7 @@ int Fun4All_G4_EICDetector(
   // Fun4All server
   //---------------
   Fun4AllServer *se = Fun4AllServer::instance();
-  se->Verbosity(0);
+  se->Verbosity(01);
   //Opt to print all random seed used for debugging reproducibility. Comment out to reduce stdout prints.
   //PHRandomSeed::Verbosity(1);
 
@@ -82,7 +82,7 @@ int Fun4All_G4_EICDetector(
   //   Input::SARTRE = true;
 
   // Simple multi particle generator in eta/phi/pt ranges
-  Input::SIMPLE = true;
+  // Input::SIMPLE = true;
   // Input::SIMPLE_NUMBER = 2; // if you need 2 of them
   // Input::SIMPLE_VERBOSITY = 1;
 
@@ -99,12 +99,12 @@ int Fun4All_G4_EICDetector(
   // And/Or read generated particles from file
 
   // eic-smear output
-  //  Input::READEIC = true;
+  Input::READEIC = true;
   INPUTREADEIC::filename = inputFile;
 
   // HepMC2 files
   //  Input::HEPMC = true;
-  Input::VERBOSITY = 0;
+  Input::VERBOSITY = 2;
   INPUTHEPMC::filename = inputFile;
 
   //-----------------
@@ -228,7 +228,7 @@ int Fun4All_G4_EICDetector(
   Enable::DSTOUT_COMPRESS = false;  // Compress DST files
 
   //Option to convert DST to human command readable TTree for quick poke around the outputs
-//  Enable::DSTREADER = true;
+  Enable::DSTREADER = true;
 
   // turn the display on (default off)
   Enable::DISPLAY = false;
@@ -278,23 +278,23 @@ int Fun4All_G4_EICDetector(
   G4TRACKING::PROJECTION_FEMC = false;
   G4TRACKING::PROJECTION_FHCAL = false;
 
-  Enable::CEMC = true;
+  Enable::CEMC = false;
   //  Enable::CEMC_ABSORBER = true;
   Enable::CEMC_CELL = Enable::CEMC && true;
   Enable::CEMC_TOWER = Enable::CEMC_CELL && true;
   Enable::CEMC_CLUSTER = Enable::CEMC_TOWER && true;
   Enable::CEMC_EVAL = Enable::CEMC_CLUSTER && true;
 
-  Enable::HCALIN = true;
+  Enable::HCALIN = false;
   //  Enable::HCALIN_ABSORBER = true;
   Enable::HCALIN_CELL = Enable::HCALIN && true;
   Enable::HCALIN_TOWER = Enable::HCALIN_CELL && true;
   Enable::HCALIN_CLUSTER = Enable::HCALIN_TOWER && true;
   Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
 
-  Enable::MAGNET = true;
+  Enable::MAGNET = false;
 
-  Enable::HCALOUT = true;
+  Enable::HCALOUT = false;
   //  Enable::HCALOUT_ABSORBER = true;
   Enable::HCALOUT_CELL = Enable::HCALOUT && true;
   Enable::HCALOUT_TOWER = Enable::HCALOUT_CELL && true;
@@ -308,25 +308,25 @@ int Fun4All_G4_EICDetector(
   Enable::RICH = true;
   Enable::AEROGEL = true;
 
-  Enable::FEMC = true;
+  Enable::FEMC = false;
   //  Enable::FEMC_ABSORBER = true;
   Enable::FEMC_TOWER = Enable::FEMC && true;
   Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
   Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
 
-  Enable::FHCAL = true;
+  Enable::FHCAL = false;
   //  Enable::FHCAL_ABSORBER = true;
   Enable::FHCAL_TOWER = Enable::FHCAL && true;
   Enable::FHCAL_CLUSTER = Enable::FHCAL_TOWER && true;
   Enable::FHCAL_EVAL = Enable::FHCAL_CLUSTER && true;
 
   // EICDetector geometry - 'electron' direction
-  Enable::EEMC = true;
+  Enable::EEMC = false;
   Enable::EEMC_TOWER = Enable::EEMC && true;
   Enable::EEMC_CLUSTER = Enable::EEMC_TOWER && true;
   Enable::EEMC_EVAL = Enable::EEMC_CLUSTER && true;
 
-  Enable::PLUGDOOR = true;
+  Enable::PLUGDOOR = false;
 
   // Other options
   Enable::GLOBAL_RECO = true;

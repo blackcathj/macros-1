@@ -24,7 +24,7 @@ R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
     const int nEvents = 1,
-    const string &inputFile = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
+    const string &inputFile = "data/hepmc_test.dat",
     const string &outputFile = "G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const int skip = 0,
@@ -34,7 +34,7 @@ int Fun4All_G4_EICDetector(
   // Fun4All server
   //---------------
   Fun4AllServer *se = Fun4AllServer::instance();
-  se->Verbosity(0);
+  se->Verbosity(01);
   //Opt to print all random seed used for debugging reproducibility. Comment out to reduce stdout prints.
   //PHRandomSeed::Verbosity(1);
 
@@ -85,7 +85,7 @@ int Fun4All_G4_EICDetector(
   //   Input::SARTRE = true;
 
   // Simple multi particle generator in eta/phi/pt ranges
-  Input::SIMPLE = true;
+  // Input::SIMPLE = true;
   // Input::SIMPLE_NUMBER = 2; // if you need 2 of them
   // Input::SIMPLE_VERBOSITY = 1;
 
@@ -106,7 +106,7 @@ int Fun4All_G4_EICDetector(
   INPUTREADEIC::filename = inputFile;
 
   // HepMC2 files
-  //  Input::HEPMC = true;
+  Input::HEPMC = true;
   Input::VERBOSITY = 0;
   INPUTHEPMC::filename = inputFile;
 
@@ -228,7 +228,7 @@ int Fun4All_G4_EICDetector(
   // Enable::DSTOUT = true;
   DstOut::OutputDir = outdir;
   DstOut::OutputFile = outputFile;
-  Enable::DSTOUT_COMPRESS = true;  // Compress DST files
+  Enable::DSTOUT_COMPRESS = true and Enable::DSTOUT;  // Compress DST files
 
   //Option to convert DST to human command readable TTree for quick poke around the outputs
   // Enable::DSTREADER = true;
@@ -251,24 +251,25 @@ int Fun4All_G4_EICDetector(
   //EIC hadron far forward magnets and detectors. IP6 and IP8 are incompatible (pick either or);
   Enable::HFARFWD_MAGNETS = true;
   Enable::HFARFWD_VIRTUAL_DETECTORS = true;
+  Enable::HFARFWD_VERBOSITY = 5;
 
   // gems
-  Enable::EGEM = true;
-  Enable::FGEM = true;
+  Enable::EGEM = false;
+  Enable::FGEM = false;
   // Enable::BGEM = true; // not yet defined in this model
-  Enable::RWELL = true;
+  Enable::RWELL = false;
   // barrel tracker
-  Enable::BARREL = true;
+  Enable::BARREL = false;
   // fst
-  Enable::FST = true;
+  Enable::FST = false;
   // G4FST::SETTING::SUPPORTCYL = false; // if want to disable support
 
   // TOFs
-  Enable::FTTL = true;
-  Enable::ETTL = true;
-  Enable::CTTL = true;
+  Enable::FTTL = false;
+  Enable::ETTL = false;
+  Enable::CTTL = false;
 
-  Enable::TRACKING = true;
+  Enable::TRACKING = false;
   Enable::TRACKING_EVAL = Enable::TRACKING && true;
   G4TRACKING::DISPLACED_VERTEX = false;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
                                          // projections to calorimeters
@@ -277,23 +278,23 @@ int Fun4All_G4_EICDetector(
   G4TRACKING::PROJECTION_FEMC = true;
   G4TRACKING::PROJECTION_FHCAL = true;
 
-  Enable::CEMC = true;
+  Enable::CEMC = false;
   //  Enable::CEMC_ABSORBER = true;
   Enable::CEMC_CELL = Enable::CEMC && true;
   Enable::CEMC_TOWER = Enable::CEMC_CELL && true;
   Enable::CEMC_CLUSTER = Enable::CEMC_TOWER && true;
   Enable::CEMC_EVAL = Enable::CEMC_CLUSTER && true;
 
-  Enable::HCALIN = true;
+  Enable::HCALIN = false;
   //  Enable::HCALIN_ABSORBER = true;
   Enable::HCALIN_CELL = Enable::HCALIN && true;
   Enable::HCALIN_TOWER = Enable::HCALIN_CELL && true;
   Enable::HCALIN_CLUSTER = Enable::HCALIN_TOWER && true;
   Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
 
-  Enable::MAGNET = true;
+  Enable::MAGNET = false;
 
-  Enable::HCALOUT = true;
+  Enable::HCALOUT = false;
   //  Enable::HCALOUT_ABSORBER = true;
   Enable::HCALOUT_CELL = Enable::HCALOUT && true;
   Enable::HCALOUT_TOWER = Enable::HCALOUT_CELL && true;
@@ -301,33 +302,33 @@ int Fun4All_G4_EICDetector(
   Enable::HCALOUT_EVAL = Enable::HCALOUT_CLUSTER && true;
 
   // EICDetector geometry - barrel
-  Enable::DIRC = true;
+  Enable::DIRC = false;
 
   // EICDetector geometry - 'hadron' direction
-  Enable::RICH = true;
+  Enable::RICH = false;
 
   // EICDetector geometry - 'electron' direction
-  Enable::mRICH = true;
+  Enable::mRICH = false;
 
-  Enable::FEMC = true;
+  Enable::FEMC = false;
   //  Enable::FEMC_ABSORBER = true;
   Enable::FEMC_TOWER = Enable::FEMC && true;
   Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
   Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
 
-  Enable::FHCAL = true;
+  Enable::FHCAL = false;
   //  Enable::FHCAL_ABSORBER = true;
   Enable::FHCAL_TOWER = Enable::FHCAL && true;
   Enable::FHCAL_CLUSTER = Enable::FHCAL_TOWER && true;
   Enable::FHCAL_EVAL = Enable::FHCAL_CLUSTER && true;
 
   // EICDetector geometry - 'electron' direction
-  Enable::EEMC = true;
+  Enable::EEMC = false;
   Enable::EEMC_TOWER = Enable::EEMC && true;
   Enable::EEMC_CLUSTER = Enable::EEMC_TOWER && true;
   Enable::EEMC_EVAL = Enable::EEMC_CLUSTER && true;
 
-  Enable::EHCAL = true;
+  Enable::EHCAL = false;
   Enable::EHCAL_CELL = Enable::EHCAL && true;
   Enable::EHCAL_TOWER = Enable::EHCAL_CELL && true;
   Enable::EHCAL_CLUSTER = Enable::EHCAL_TOWER && true;
@@ -340,7 +341,7 @@ int Fun4All_G4_EICDetector(
   Enable::GLOBAL_FASTSIM = true;
 
   // jet reconstruction
-  Enable::FWDJETS = true;
+  Enable::FWDJETS = false;
   Enable::FWDJETS_EVAL = Enable::FWDJETS && true;
 
   // new settings using Enable namespace in GlobalVariables.C
@@ -349,7 +350,7 @@ int Fun4All_G4_EICDetector(
   //BlackHoleGeometry::visible = true;
 
   // Enabling the event evaluator?
-  Enable::EVENT_EVAL = true;
+  Enable::EVENT_EVAL = false;
   // EVENT_EVALUATOR::Verbosity = 1;
   // EVENT_EVALUATOR::EnergyThreshold = 0.05; // GeV
 

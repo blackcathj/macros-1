@@ -40,7 +40,8 @@ int Fun4All_G4_EICDetector(
           crossing,beam_config.c_str());
 
   const string &outputFile = inputFile +
-      Form(".G4EICDetector.CrossDivergenceCrab.root");
+      Form(".G4EICDetector.CrossDivergence.root");
+//  Form(".G4EICDetector.CrossDivergenceCrab.root");
 
   Input::EIC_hadron_crossing_angle = crossing * 1e-3;
 

@@ -171,23 +171,23 @@ namespace Input
 //        -EIC_hadron_crossing_angle / 2. / z_hadron_cavity, 0,
 //        -EIC_hadron_crossing_angle / 2. / z_e_cavity, 0);
 
-    // calculate beam sigma width at IP  as in EIC CDR table 1.1
-    const double sigma_p_h = sqrt(80 * 11.3e-7);
-    const double sigma_p_v = sqrt(7.2 * 1.0e-7);
-    const double sigma_p_l = 6;
-    const double sigma_e_h = sqrt(45 * 20.0e-7);
-    const double sigma_e_v = sqrt(5.6 * 1.3e-7);
-    const double sigma_e_l = 2;
-
-    // combine two beam gives the collision sigma in z
-    const double collision_sigma_z = sqrt(sigma_p_l * sigma_p_l + sigma_e_l * sigma_e_l) / 2;
-    const double collision_sigma_t = collision_sigma_z / 29.9792;  // speed of light in cm/ns
-
-    HepMCGen->set_vertex_distribution_width(
-        sigma_p_h * sigma_e_h / sqrt(sigma_p_h * sigma_p_h + sigma_e_h * sigma_e_h),  //x
-        sigma_p_v * sigma_e_v / sqrt(sigma_p_v * sigma_p_v + sigma_e_v * sigma_e_v),  //y
-        collision_sigma_z,                                                            //z
-        collision_sigma_t);                                                           //t
+//    // calculate beam sigma width at IP  as in EIC CDR table 1.1
+//    const double sigma_p_h = sqrt(80 * 11.3e-7);
+//    const double sigma_p_v = sqrt(7.2 * 1.0e-7);
+//    const double sigma_p_l = 6;
+//    const double sigma_e_h = sqrt(45 * 20.0e-7);
+//    const double sigma_e_v = sqrt(5.6 * 1.3e-7);
+//    const double sigma_e_l = 2;
+//
+//    // combine two beam gives the collision sigma in z
+//    const double collision_sigma_z = sqrt(sigma_p_l * sigma_p_l + sigma_e_l * sigma_e_l) / 2;
+//    const double collision_sigma_t = collision_sigma_z / 29.9792;  // speed of light in cm/ns
+//
+//    HepMCGen->set_vertex_distribution_width(
+//        sigma_p_h * sigma_e_h / sqrt(sigma_p_h * sigma_p_h + sigma_e_h * sigma_e_h),  //x
+//        sigma_p_v * sigma_e_v / sqrt(sigma_p_v * sigma_p_v + sigma_e_v * sigma_e_v),  //y
+//        collision_sigma_z,                                                            //z
+//        collision_sigma_t);                                                           //t
     HepMCGen->set_vertex_distribution_function(
         PHHepMCGenHelper::Gaus,   //x
         PHHepMCGenHelper::Gaus,   //y

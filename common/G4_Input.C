@@ -87,6 +87,10 @@ namespace Input
   int VERBOSITY = 0;
   int EmbedId = 1;
 
+  //25mrad x-ing as in EIC CDR
+  double EIC_hadron_crossing_angle = 25e-3;
+  string beam_config = "18x275";
+
   //! apply sPHENIX nominal beam parameter with 2mrad crossing as defined in sPH-TRG-2020-001
   //! \param[in] HepMCGen any HepMC generator, e.g. Fun4AllHepMCInputManager, Fun4AllHepMCPileupInputManager, PHPythia8, PHPythia6, PHSartre, ReadEICFiles
   void ApplysPHENIXBeamParameter(PHHepMCGenHelper *HepMCGen)
@@ -103,6 +107,8 @@ namespace Input
         100e-4,         // approximation from past RICH data
         7,              // sPH-TRG-2020-001. Fig 3.2
         20 / 29.9792);  // 20cm collision length / speed of light in cm/ns
+
+
     HepMCGen->set_vertex_distribution_function(
         PHHepMCGenHelper::Gaus,
         PHHepMCGenHelper::Gaus,
@@ -122,8 +128,9 @@ namespace Input
     }
     // HepMCGen->PHHepMCGenHelper_Verbosity(1);
 
-    //25mrad x-ing as in EIC CDR
-    const double EIC_hadron_crossing_angle = 25e-3;
+
+    cout <<__PRETTY_FUNCTION__ << ": beam_config = " << beam_config
+        <<", EIC_hadron_crossing_angle = "<<EIC_hadron_crossing_angle<<endl;
 
     HepMCGen->set_beam_direction_theta_phi(
         EIC_hadron_crossing_angle,  // beamA_theta
@@ -131,10 +138,29 @@ namespace Input
         M_PI,                       // beamB_theta
         0                           // beamB_phi
     );
-    HepMCGen->set_beam_angular_divergence_hv(
-        150e-6, 150e-6,  // proton beam divergence horizontal & vertical, as in EIC CDR Table 3.3
-        202e-6, 187e-6   // electron beam divergence horizontal & vertical, as in EIC CDR Table 3.3
-    );
+
+    if (beam_config == "18x275")
+    {
+
+      HepMCGen->set_beam_angular_divergence_hv(
+          150e-6, 150e-6,  // proton beam divergence horizontal & vertical, as in EIC CDR Table 3.3
+          202e-6, 187e-6   // electron beam divergence horizontal & vertical, as in EIC CDR Table 3.3
+      );
+    }
+    else if (beam_config == "5x41")
+    {
+
+      HepMCGen->set_beam_angular_divergence_hv(
+          220e-6, 380e-6,  // proton beam divergence horizontal & vertical, as in EIC CDR Table 3.3
+          101e-6, 129e-6   // electron beam divergence horizontal & vertical, as in EIC CDR Table 3.3
+      );
+    }
+    else
+    {
+      cout <<__PRETTY_FUNCTION__ << ": Wrong beam setting " << beam_config;
+      exit(1);
+    }
+
 
 //    // angular kick within a bunch as result of crab cavity
 //    // using an naive assumption of transfer matrix from the cavity to IP,

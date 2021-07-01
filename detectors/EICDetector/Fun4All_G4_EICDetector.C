@@ -24,13 +24,25 @@
 R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
-    const int nEvents = 1000000,
-    const string &inputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/headonTestJin/test_headon_25mRad_18x275_v1.hepmc",
+//    const int nEvents = 1000000,
+    const int nEvents = 100,
+    const string beam_config = "18x275",
+    const int crossing  = 25,
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const int skip = 0,
     const string &outdir = ".")
 {
-  const string &outputFile = inputFile + ".G4EICDetectorLargeVol.CrossDivergence.root";
+
+  const string &inputFile =
+      // Form("/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/testNoEffects_hiDiv_%s_%dmRad.hepmc",beam_config.c_str(),crossing);
+      // headonTestJin/test_headon_35mRad_18x275_v1.hepmc
+      Form("/phenix/u/jinhuang/links/sPHENIX_work/EIC/BeamXing/headonTestJin/test_headon_%dmRad_%s_v1.hepmc",
+          crossing,beam_config.c_str());
+
+  const string &outputFile = inputFile +
+      Form(".G4EICDetector.CrossDivergenceCrab.root");
+
+  Input::EIC_hadron_crossing_angle = crossing * 1e-3;
 
   //---------------
   // Fun4All server

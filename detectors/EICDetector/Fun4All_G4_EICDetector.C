@@ -24,7 +24,7 @@ R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
     const int nEvents = 1,
-    const string &inputFile = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
+    const string &inputFile = "data/hepmc_test.dat",
     const string &outputFile = "G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const int skip = 0,
@@ -34,7 +34,7 @@ int Fun4All_G4_EICDetector(
   // Fun4All server
   //---------------
   Fun4AllServer *se = Fun4AllServer::instance();
-  se->Verbosity(0);
+  se->Verbosity(01);
   //Opt to print all random seed used for debugging reproducibility. Comment out to reduce stdout prints.
   //PHRandomSeed::Verbosity(1);
 
@@ -88,7 +88,7 @@ int Fun4All_G4_EICDetector(
   //   Input::SARTRE = true;
 
   // Simple multi particle generator in eta/phi/pt ranges
-  Input::SIMPLE = true;
+//  Input::SIMPLE = true;
   // Input::SIMPLE_NUMBER = 2; // if you need 2 of them
   // Input::SIMPLE_VERBOSITY = 1;
 
@@ -109,7 +109,7 @@ int Fun4All_G4_EICDetector(
   INPUTREADEIC::filename = inputFile;
 
   // HepMC2 files
-  //  Input::HEPMC = true;
+    Input::HEPMC = true;
   Input::VERBOSITY = 0;
   INPUTHEPMC::filename = inputFile;
 
@@ -237,14 +237,14 @@ int Fun4All_G4_EICDetector(
   // Enable::DSTREADER = true;
 
   // turn the display on (default off)
-  //  Enable::DISPLAY = true;
+    Enable::DISPLAY = true;
 
   //======================
   // What to run
   //======================
   // Global options (enabled for all subsystems - if implemented)
   //  Enable::ABSORBER = true;
-  //  Enable::OVERLAPCHECK = true;
+    Enable::OVERLAPCHECK = true;
   //  Enable::VERBOSITY = 1;
 
   // whether to simulate the Be section of the beam pipe

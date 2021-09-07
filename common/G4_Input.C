@@ -639,7 +639,7 @@ void InputManagers()
     }
     else if (!INPUTHEPMC::listfile.empty())
     {
-      INPUTMANAGER::HepMCInputManager->AddListFile(INPUTHEPMC::listfile);
+      INPUTMANAGER::HepMCInputManager->AddListFile(INPUTHEPMC::listfile, 1);
     }
     else
     {

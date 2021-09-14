@@ -8,6 +8,7 @@
 /control/verbose 2
 /control/saveHistory
 /run/verbose 2
+/tracking/verbose 3
 #
 # create empty scene
 #
@@ -26,7 +27,8 @@
 # machines. You might have to play with it. GEANT prints out a
 # list of available graphics systems at some point.
 #/vis/open OGLIX
-/vis/open OGL 1200x900-0+0
+/vis/open OGL 2200x1400-0+0
+/vis/viewer/set/background white
 # increase display limit for more complex detectors
 /vis/ogl/set/displayListLimit 500000
 /vis/viewer/set/viewpointThetaPhi 240 -40
@@ -68,7 +70,7 @@
 # remove low energy stuff
 /vis/filtering/trajectories/create/attributeFilter
 /vis/filtering/trajectories/attributeFilter-0/setAttribute IMag
-/vis/filtering/trajectories/attributeFilter-0/addInterval 2 MeV 1000 GeV
+/vis/filtering/trajectories/attributeFilter-0/addInterval 50 MeV 1000 GeV
 #
 /vis/scene/endOfEventAction accumulate
 #

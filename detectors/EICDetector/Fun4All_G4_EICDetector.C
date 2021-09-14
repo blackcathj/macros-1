@@ -36,7 +36,7 @@ int Fun4All_G4_EICDetector(
   // Fun4All server
   //---------------
   Fun4AllServer *se = Fun4AllServer::instance();
-  se->Verbosity(0);
+  se->Verbosity(01);
   //Opt to print all random seed used for debugging reproducibility. Comment out to reduce stdout prints.
   //PHRandomSeed::Verbosity(1);
 
@@ -46,7 +46,7 @@ int Fun4All_G4_EICDetector(
   // PHRandomSeed() which reads /dev/urandom to get its seed
   // if the RANDOMSEED flag is set its value is taken as initial seed
   // which will produce identical results so you can debug your code
-  // rc->set_IntFlag("RANDOMSEED", 12345);
+   rc->set_IntFlag("RANDOMSEED", 12345);
 
   bool generate_seed = false;
 
@@ -251,26 +251,26 @@ int Fun4All_G4_EICDetector(
   // Enable::DSTREADER = true;
 
   // turn the display on (default off)
-  //  Enable::DISPLAY = true;
+    Enable::DISPLAY = true;
 
   //======================
   // What to run
   //======================
   // Global options (enabled for all subsystems - if implemented)
   //  Enable::ABSORBER = true;
-  //  Enable::OVERLAPCHECK = true;
+//    Enable::OVERLAPCHECK = true;
   //  Enable::VERBOSITY = 1;
 
   // whether to simulate the Be section of the beam pipe
   Enable::PIPE = true;
   // If need to disable EIC beam pipe extension beyond the Be-section:
    G4PIPE::use_forward_pipes = false;
-  //EIC hadron far forward magnets and detectors. IP6 and IP8 are incompatible (pick either or);
-  Enable::HFARFWD_MAGNETS = true;
-  Enable::HFARFWD_VIRTUAL_DETECTORS = true;
-
-  Enable::HFARBWD_MAGNETS = true;
-  Enable::HFARBWD_VIRTUAL_DETECTORS = true;
+//  //EIC hadron far forward magnets and detectors. IP6 and IP8 are incompatible (pick either or);
+//  Enable::HFARFWD_MAGNETS = true;
+//  Enable::HFARFWD_VIRTUAL_DETECTORS = true;
+//
+//  Enable::HFARBWD_MAGNETS = true;
+//  Enable::HFARBWD_VIRTUAL_DETECTORS = true;
 
   // gems
   Enable::EGEM = true;
@@ -285,7 +285,7 @@ int Fun4All_G4_EICDetector(
   Enable::FST = true;
   G4FST::SETTING::SUPPORTCYL = false; // if want to disable support
 
-  // TOFs
+//  // TOFs
   Enable::FTTL = true;
   Enable::ETTL = true;
   Enable::CTTL = true;
@@ -308,25 +308,25 @@ int Fun4All_G4_EICDetector(
   Enable::BECAL_TOWER   = Enable::BECAL_CELL && true;
   Enable::BECAL_CLUSTER = Enable::BECAL_TOWER && true;
   Enable::BECAL_EVAL    = Enable::BECAL_CLUSTER && true;
-
-  Enable::HCALIN = false;
+//
+  Enable::HCALIN = true;
   //  Enable::HCALIN_ABSORBER = true;
   Enable::HCALIN_CELL = Enable::HCALIN && true;
   Enable::HCALIN_TOWER = Enable::HCALIN_CELL && true;
   Enable::HCALIN_CLUSTER = Enable::HCALIN_TOWER && true;
   Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
-
+//
   Enable::MAGNET = true;
-
+//
   Enable::HCALOUT = true;
   //  Enable::HCALOUT_ABSORBER = true;
   Enable::HCALOUT_CELL = Enable::HCALOUT && true;
   Enable::HCALOUT_TOWER = Enable::HCALOUT_CELL && true;
   Enable::HCALOUT_CLUSTER = Enable::HCALOUT_TOWER && true;
   Enable::HCALOUT_EVAL = Enable::HCALOUT_CLUSTER && true;
-
+//
   // EICDetector geometry - barrel
-  Enable::DIRC = false;
+  Enable::DIRC = true;
 
   // EICDetector geometry - 'hadron' direction
   Enable::RICH = true;
@@ -334,28 +334,28 @@ int Fun4All_G4_EICDetector(
   // EICDetector geometry - 'electron' direction
   Enable::mRICH = true;
 
-  Enable::FEMC = true;
-  //  Enable::FEMC_ABSORBER = true;
-  Enable::FEMC_TOWER = Enable::FEMC && true;
-  Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
-  Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
-
-  //Enable::DRCALO = false;
-  Enable::DRCALO_CELL = Enable::DRCALO && true;
-  Enable::DRCALO_TOWER = Enable::DRCALO_CELL && true;
-  Enable::DRCALO_CLUSTER = Enable::DRCALO_TOWER && true;
-  Enable::DRCALO_EVAL = Enable::DRCALO_CLUSTER && false;
-  G4TTL::SETTING::optionDR = 1;
-
-  Enable::LFHCAL = false;
-  G4LFHCAL::SETTING::longer = true;
-  G4LFHCAL::SETTING::asymmetric = true;
-  Enable::LFHCAL_ABSORBER = false;
-  Enable::LFHCAL_CELL = Enable::LFHCAL && true;
-  Enable::LFHCAL_TOWER = Enable::LFHCAL_CELL && true;
-  Enable::LFHCAL_CLUSTER = Enable::LFHCAL_TOWER && true;
-  Enable::LFHCAL_EVAL = Enable::LFHCAL_CLUSTER && true;
-
+//  Enable::FEMC = true;
+//  //  Enable::FEMC_ABSORBER = true;
+//  Enable::FEMC_TOWER = Enable::FEMC && true;
+//  Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
+//  Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
+//
+//  //Enable::DRCALO = false;
+//  Enable::DRCALO_CELL = Enable::DRCALO && true;
+//  Enable::DRCALO_TOWER = Enable::DRCALO_CELL && true;
+//  Enable::DRCALO_CLUSTER = Enable::DRCALO_TOWER && true;
+//  Enable::DRCALO_EVAL = Enable::DRCALO_CLUSTER && false;
+//  G4TTL::SETTING::optionDR = 1;
+////
+////  Enable::LFHCAL = false;
+////  G4LFHCAL::SETTING::longer = true;
+////  G4LFHCAL::SETTING::asymmetric = true;
+////  Enable::LFHCAL_ABSORBER = false;
+////  Enable::LFHCAL_CELL = Enable::LFHCAL && true;
+////  Enable::LFHCAL_TOWER = Enable::LFHCAL_CELL && true;
+////  Enable::LFHCAL_CLUSTER = Enable::LFHCAL_TOWER && true;
+////  Enable::LFHCAL_EVAL = Enable::LFHCAL_CLUSTER && true;
+////
   // EICDetector geometry - 'electron' direction
   Enable::EEMCH = true;
   G4EEMCH::SETTING::USECEMCGeo  = false;
@@ -366,16 +366,16 @@ int Fun4All_G4_EICDetector(
   G4TTL::SETTING::optionEEMCH = Enable::EEMCH && true;
   G4TTL::SETTING::optionCEMC = false;
   G4TTL::SETTING::optionGeo = 1;
-
-  Enable::EHCAL = true;
-  Enable::EHCAL_CELL = Enable::EHCAL && true;
-  Enable::EHCAL_TOWER = Enable::EHCAL_CELL && true;
-  Enable::EHCAL_CLUSTER = Enable::EHCAL_TOWER && true;
-  Enable::EHCAL_EVAL = Enable::EHCAL_CLUSTER && true;
-
-  Enable::FFR_EVAL = Enable::HFARFWD_MAGNETS && Enable::HFARFWD_VIRTUAL_DETECTORS && true;
-
-  Enable::PLUGDOOR = false;
+////
+////  Enable::EHCAL = true;
+////  Enable::EHCAL_CELL = Enable::EHCAL && true;
+////  Enable::EHCAL_TOWER = Enable::EHCAL_CELL && true;
+////  Enable::EHCAL_CLUSTER = Enable::EHCAL_TOWER && true;
+////  Enable::EHCAL_EVAL = Enable::EHCAL_CLUSTER && true;
+////
+////  Enable::FFR_EVAL = Enable::HFARFWD_MAGNETS && Enable::HFARFWD_VIRTUAL_DETECTORS && true;
+////
+////  Enable::PLUGDOOR = false;
 
   // Other options
   Enable::GLOBAL_RECO = G4TRACKING::DISPLACED_VERTEX; // use reco vertex for global event vertex
@@ -588,7 +588,7 @@ int Fun4All_G4_EICDetector(
     cout << "se->run(1)" << endl;
     cout << "Run Geant4 command with following examples" << endl;
     gROOT->ProcessLine("displaycmd()");
-
+    se->run(1) ;
     return 0;
   }
   // if we use a negative number of events we go back to the command line here

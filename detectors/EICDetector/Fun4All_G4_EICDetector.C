@@ -152,8 +152,8 @@ int Fun4All_G4_EICDetector(
       INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_function(PHG4SimpleEventGenerator::Uniform,
                                                                                 PHG4SimpleEventGenerator::Uniform,
                                                                                 PHG4SimpleEventGenerator::Uniform);
-      INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_mean(0., 0., 0.);
-      INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_width(0., 0., 5.);
+      INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_mean(-243.674/10,365.671/10,3278.26/10);
+      INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_width(0., 0., 0.);
     }
     INPUTGENERATOR::SimpleEventGenerator[0]->set_eta_range(-3, 3);
     INPUTGENERATOR::SimpleEventGenerator[0]->set_phi_range(-M_PI, M_PI);

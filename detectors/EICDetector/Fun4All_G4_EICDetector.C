@@ -25,13 +25,15 @@
 R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
-    const int nEvents = 1,
+    const int nDetectors = 1,
     const string &inputFile = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const string &outputFile = "G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const int skip = 0,
     const string &outdir = ".")
 {
+  const int nEvents = 1;
+
   //---------------
   // Fun4All server
   //---------------
@@ -262,114 +264,114 @@ int Fun4All_G4_EICDetector(
   //  Enable::VERBOSITY = 1;
 
   // whether to simulate the Be section of the beam pipe
-  Enable::PIPE = true;
+  Enable::PIPE = (nDetectors>1);
   // If need to disable EIC beam pipe extension beyond the Be-section:
-  G4PIPE::use_forward_pipes = true;
+  G4PIPE::use_forward_pipes = Enable::PIPE && true;
   //EIC hadron far forward magnets and detectors. IP6 and IP8 are incompatible (pick either or);
-  Enable::HFARFWD_MAGNETS = true;
-  Enable::HFARFWD_VIRTUAL_DETECTORS = true;
-
-  Enable::HFARBWD_MAGNETS = true;
-  Enable::HFARBWD_VIRTUAL_DETECTORS = true;
+//  Enable::HFARFWD_MAGNETS = true;
+//  Enable::HFARFWD_VIRTUAL_DETECTORS = true;
+//
+//  Enable::HFARBWD_MAGNETS = true;
+//  Enable::HFARBWD_VIRTUAL_DETECTORS = true;
 
   // gems
-  Enable::EGEM = true;
-  Enable::FGEM = true;
+  Enable::EGEM =  (nDetectors>5);
+  Enable::FGEM =  (nDetectors>5);
   // Enable::BGEM = true; // not yet defined in this model
-  Enable::RWELL = true;
+  Enable::RWELL =  (nDetectors>3);
   // barrel tracker
-  Enable::TrackingService = true;
+  Enable::TrackingService = (nDetectors>13);
   // Enable::TrackingService_VERBOSITY = INT_MAX - 10;
-  Enable::BARREL = true;
+  Enable::BARREL = (nDetectors>2);
   // fst
-  Enable::FST = true;
+  Enable::FST =  (nDetectors>4);
 
   // TOFs
-  Enable::FTTL = true;
-  Enable::ETTL = true;
-  Enable::CTTL = true;
+  Enable::FTTL =  (nDetectors>9);
+  Enable::ETTL =  (nDetectors>10);
+  Enable::CTTL =  (nDetectors>11);
   G4TTL::SETTING::optionCEMC = false;
   G4TTL::SETTING::optionGeo = 1;
 
-  Enable::TRACKING = true;
-  Enable::TRACKING_EVAL = Enable::TRACKING && true;
-  G4TRACKING::DISPLACED_VERTEX = true;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
+//  Enable::TRACKING = true;
+//  Enable::TRACKING_EVAL = Enable::TRACKING && true;
+//  G4TRACKING::DISPLACED_VERTEX = true;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
                                         // projections to calorimeters
-  G4TRACKING::PROJECTION_EEMC = true;
-  G4TRACKING::PROJECTION_BECAL = true;
-  G4TRACKING::PROJECTION_EHCAL = true;
-  G4TRACKING::PROJECTION_CEMC = true;
-  G4TRACKING::PROJECTION_HCALOUT = true;
-  G4TRACKING::PROJECTION_FEMC = true;
-  G4TRACKING::PROJECTION_FHCAL = true;
-  G4TRACKING::PROJECTION_LFHCAL = true;
+//  G4TRACKING::PROJECTION_EEMC = true;
+//  G4TRACKING::PROJECTION_BECAL = true;
+//  G4TRACKING::PROJECTION_EHCAL = true;
+//  G4TRACKING::PROJECTION_CEMC = true;
+//  G4TRACKING::PROJECTION_HCALOUT = true;
+//  G4TRACKING::PROJECTION_FEMC = true;
+//  G4TRACKING::PROJECTION_FHCAL = true;
+//  G4TRACKING::PROJECTION_LFHCAL = true;
 
-  Enable::BECAL = true;
-  Enable::BECAL_CELL = Enable::BECAL && true;
+  Enable::BECAL = (nDetectors>14);
+  Enable::BECAL_CELL = Enable::BECAL && false;
   Enable::BECAL_TOWER = Enable::BECAL_CELL && true;
   Enable::BECAL_CLUSTER = Enable::BECAL_TOWER && true;
   Enable::BECAL_EVAL = Enable::BECAL_CLUSTER && true;
 
-  Enable::HCALIN = true;
+  Enable::HCALIN = (nDetectors>15);
   //  Enable::HCALIN_ABSORBER = true;
-  Enable::HCALIN_CELL = Enable::HCALIN && true;
+  Enable::HCALIN_CELL = Enable::HCALIN && false;
   Enable::HCALIN_TOWER = Enable::HCALIN_CELL && true;
   Enable::HCALIN_CLUSTER = Enable::HCALIN_TOWER && true;
   Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
 
-  Enable::MAGNET = true;
+  Enable::MAGNET = (nDetectors>16);
 
-  Enable::HCALOUT = true;
+  Enable::HCALOUT = (nDetectors>17);
   //  Enable::HCALOUT_ABSORBER = true;
-  Enable::HCALOUT_CELL = Enable::HCALOUT && true;
+  Enable::HCALOUT_CELL = Enable::HCALOUT && false;
   Enable::HCALOUT_TOWER = Enable::HCALOUT_CELL && true;
   Enable::HCALOUT_CLUSTER = Enable::HCALOUT_TOWER && true;
   Enable::HCALOUT_EVAL = Enable::HCALOUT_CLUSTER && true;
 
   // EICDetector geometry - barrel
-  Enable::DIRC = true;
-  Enable::DIRC_RECO = Enable::DIRC && true;
+  Enable::DIRC =  (nDetectors>6);
+  Enable::DIRC_RECO = Enable::DIRC && false;
   // Enable::DIRC_VERBOSITY = 2;
 
   // EICDetector geometry - 'hadron' direction
-  Enable::RICH = true;
-  Enable::RICH_RECO = Enable::DIRC && true;
+  Enable::RICH =  (nDetectors>8);
+  Enable::RICH_RECO = Enable::DIRC && false;
   // Enable::RICH_VERBOSITY = 2;
 
   // EICDetector geometry - 'electron' direction
-  Enable::mRICH = true;
-  Enable::mRICH_RECO = Enable::DIRC && true;
+  Enable::mRICH =  (nDetectors>7);
+  Enable::mRICH_RECO = Enable::DIRC && false;
   // Enable::mRICH_VERBOSITY = 2;
 
-  Enable::FEMC = true;
+  Enable::FEMC = (nDetectors>19);
   //  Enable::FEMC_ABSORBER = true;
-  Enable::FEMC_TOWER = Enable::FEMC && true;
+  Enable::FEMC_TOWER = Enable::FEMC && false;
   Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
   Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
 
   //Enable::DRCALO = false;
-  Enable::DRCALO_CELL = Enable::DRCALO && true;
+  Enable::DRCALO_CELL = Enable::DRCALO && false;
   Enable::DRCALO_TOWER = Enable::DRCALO_CELL && true;
   Enable::DRCALO_CLUSTER = Enable::DRCALO_TOWER && true;
   Enable::DRCALO_EVAL = Enable::DRCALO_CLUSTER && false;
   G4TTL::SETTING::optionDR = 1;
 
-  Enable::LFHCAL = true;
+  Enable::LFHCAL = (nDetectors>20);
   Enable::LFHCAL_ABSORBER = false;
-  Enable::LFHCAL_CELL = Enable::LFHCAL && true;
+  Enable::LFHCAL_CELL = Enable::LFHCAL && false;
   Enable::LFHCAL_TOWER = Enable::LFHCAL_CELL && true;
   Enable::LFHCAL_CLUSTER = Enable::LFHCAL_TOWER && true;
   Enable::LFHCAL_EVAL = Enable::LFHCAL_CLUSTER && true;
 
   // EICDetector geometry - 'electron' direction
-  Enable::EEMCH = true;
-  Enable::EEMCH_TOWER = Enable::EEMCH && true;
+  Enable::EEMCH = (nDetectors>12);
+  Enable::EEMCH_TOWER = Enable::EEMCH && false;
   Enable::EEMCH_CLUSTER = Enable::EEMCH_TOWER && true;
   Enable::EEMCH_EVAL = Enable::EEMCH_CLUSTER && true;
   G4TTL::SETTING::optionEEMCH = Enable::EEMCH && true;
 
-  Enable::EHCAL = true;
-  Enable::EHCAL_CELL = Enable::EHCAL && true;
+  Enable::EHCAL = (nDetectors>18);
+  Enable::EHCAL_CELL = Enable::EHCAL && false;
   Enable::EHCAL_TOWER = Enable::EHCAL_CELL && true;
   Enable::EHCAL_CLUSTER = Enable::EHCAL_TOWER && true;
   Enable::EHCAL_EVAL = Enable::EHCAL_CLUSTER && true;
@@ -383,11 +385,11 @@ int Fun4All_G4_EICDetector(
   Enable::GLOBAL_FASTSIM = true;
 
   // jet reconstruction
-  Enable::FWDJETS = true;
-  Enable::FWDJETS_EVAL = Enable::FWDJETS && true;
+  Enable::FWDJETS = false;
+  Enable::FWDJETS_EVAL = Enable::FWDJETS && false;
 
   // new settings using Enable namespace in GlobalVariables.C
-  Enable::BLACKHOLE = true;
+  Enable::BLACKHOLE = false;
   //Enable::BLACKHOLE_SAVEHITS = false; // turn off saving of bh hits
   //BlackHoleGeometry::visible = true;
 
@@ -412,7 +414,7 @@ int Fun4All_G4_EICDetector(
   // World Settings
   //---------------
   //  G4WORLD::PhysicsList = "FTFP_BERT"; //FTFP_BERT_HP best for calo
-  //  G4WORLD::WorldMaterial = "G4_AIR"; // set to G4_GALACTIC for material scans
+    G4WORLD::WorldMaterial = "G4_GALACTIC"; // set to G4_GALACTIC for material scans
 
   //---------------
   // Magnet Settings
@@ -619,8 +621,45 @@ int Fun4All_G4_EICDetector(
     return 0;
   }
 
-  se->skip(skip);
-  se->run(nEvents);
+  {
+    cout <<"Inititiate Geometry scan"<<endl;
+
+    PHG4Reco *g4 = (PHG4Reco *) se->getSubsysReco("PHG4RECO");
+    g4->InitRun(se->topNode());
+    g4->ApplyDisplayAction();
+    //    sprintf(cmd, "/control/execute %s", mac);
+    //    g4->ApplyCommand(cmd);
+    // the span is the delta phi/theta you want to cover, not the maximum
+    // angle. The default is 10 bins in azimuth at theta=0.1 (almost
+    // midrapidity, exact midrapidity we have gaps in the calorimeters and inner tracking
+    float phimin = 3;
+    float phispan = 360.;
+//    int phibins = 2001+1;
+    int phibins = 3 + 1;
+
+//      for (double eta = -4.3; eta <= +4.3; eta += .02)
+      for (double eta = -3.5; eta <= +3.5; eta += .5)
+    {
+      const double theta = 2 * atan(exp(-eta));
+      const double theta_deg = 90 - theta / TMath::Pi() * 180;
+      char cmd[200];
+
+      sprintf(cmd, "/control/matScan/phi %d %f %f deg", phibins, phimin, phispan);
+      cout << "executing " << cmd << endl;
+      g4->ApplyCommand(cmd);
+
+      // set theta range - one at theta=0 which is vertically w.r.t. the beam axis
+      sprintf(cmd, "/control/matScan/theta  %d %f 0 deg", 1, theta_deg);
+      cout << "executing " << cmd << endl;
+      g4->ApplyCommand(cmd);
+      // do the scan
+      cout << "starting scan - patience" << endl;
+      g4->ApplyCommand("/control/matScan/scan");
+    }
+  }
+
+//  se->skip(skip);
+//  se->run(nEvents);
 
   //-----
   // Exit

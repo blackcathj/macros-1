@@ -293,7 +293,7 @@ int Fun4All_G4_EICDetector(
   G4TTL::SETTING::optionCEMC = false;
   G4TTL::SETTING::optionGeo = 1;
 
-//  Enable::TRACKING = true;
+  Enable::TRACKING = true;
 //  Enable::TRACKING_EVAL = Enable::TRACKING && true;
 //  G4TRACKING::DISPLACED_VERTEX = true;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
                                         // projections to calorimeters
@@ -634,11 +634,11 @@ int Fun4All_G4_EICDetector(
     // midrapidity, exact midrapidity we have gaps in the calorimeters and inner tracking
     float phimin = 3;
     float phispan = 360.;
-//    int phibins = 2001+1;
-    int phibins = 3 + 1;
+//    int phibins = 239+1;
+    int phibins = 17 + 1;
 
-//      for (double eta = -4.3; eta <= +4.3; eta += .02)
-      for (double eta = -3.5; eta <= +3.5; eta += .5)
+      for (double eta = -4.3; eta <= +4.3; eta += .05)
+//      for (double eta = -3.5; eta <= +3.5; eta += .5)
     {
       const double theta = 2 * atan(exp(-eta));
       const double theta_deg = 90 - theta / TMath::Pi() * 180;

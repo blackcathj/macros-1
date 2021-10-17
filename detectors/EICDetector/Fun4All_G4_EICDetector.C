@@ -634,10 +634,10 @@ int Fun4All_G4_EICDetector(
     // midrapidity, exact midrapidity we have gaps in the calorimeters and inner tracking
     float phimin = 3;
     float phispan = 360.;
-    int phibins = 239+1;
+    int phibins = 313+1;
 //    int phibins = 17 + 1;
 
-      for (double eta = -4.3; eta <= +4.3; eta += .02)
+      for (double eta = -4.3; eta <= +4.3; eta += .01)
 //      for (double eta = -3.5; eta <= +3.5; eta += .5)
     {
       const double theta = 2 * atan(exp(-eta));

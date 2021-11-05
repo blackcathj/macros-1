@@ -36,7 +36,7 @@ int Fun4All_G4_EICDetector(
   // Fun4All server
   //---------------
   Fun4AllServer *se = Fun4AllServer::instance();
-  se->Verbosity(0);
+  se->Verbosity(01);
   //Opt to print all random seed used for debugging reproducibility. Comment out to reduce stdout prints.
   //PHRandomSeed::Verbosity(1);
 
@@ -46,7 +46,7 @@ int Fun4All_G4_EICDetector(
   // PHRandomSeed() which reads /dev/urandom to get its seed
   // if the RANDOMSEED flag is set its value is taken as initial seed
   // which will produce identical results so you can debug your code
-  // rc->set_IntFlag("RANDOMSEED", 12345);
+   rc->set_IntFlag("RANDOMSEED", 1);
 
   bool generate_seed = false;
 
@@ -93,7 +93,8 @@ int Fun4All_G4_EICDetector(
   //INPUTEMBED::listfile[0] = embed_input_file;
 
   // Use Pythia 8
-  // Input::PYTHIA8 = true;
+  Input::PYTHIA8 = true;
+  PYTHIA8::config_file = "./phpythia8_ep.cfg";
 
   // Use Pythia 6
   // Input::PYTHIA6 = true;
@@ -102,7 +103,7 @@ int Fun4All_G4_EICDetector(
   //   Input::SARTRE = true;
 
   // Simple multi particle generator in eta/phi/pt ranges
-  Input::SIMPLE = true;
+  // Input::SIMPLE = true;
   // Input::SIMPLE_NUMBER = 2; // if you need 2 of them
   // Input::SIMPLE_VERBOSITY = 1;
 
@@ -251,7 +252,7 @@ int Fun4All_G4_EICDetector(
   // Enable::DSTREADER = true;
 
   // turn the display on (default off)
-  //  Enable::DISPLAY = true;
+    Enable::DISPLAY = true;
 
   //======================
   // What to run
@@ -420,7 +421,7 @@ int Fun4All_G4_EICDetector(
   // Enable::RP2nd_FULLHITPLANE = true;
 
   // Enabling the event evaluator?
-  Enable::EVENT_EVAL = true;
+  Enable::EVENT_EVAL = false;
   // EVENT_EVALUATOR::Verbosity = 1;
   // EVENT_EVALUATOR::EnergyThreshold = 0.05; // GeV
   Enable::EVENT_EVAL_DO_HEPMC = Input::PYTHIA6 or Input::PYTHIA8 or Input::SARTRE or Input::HEPMC or Input::READEIC;

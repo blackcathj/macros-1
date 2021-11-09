@@ -164,10 +164,10 @@ namespace Input
     // https://github.com/eic/documents/blob/master/reports/general/Note-Simulations-BeamEffects.pdf
     const double sigma_p_h = sqrt(beta_star_p_h * 18e-7);
     const double sigma_p_v = sqrt(beta_star_p_v * 1.6e-7);
-    const double sigma_p_l = 6;
+    const double sigma_p_l = 0.1;
     const double sigma_e_h = sqrt(beta_star_e_h * 24e-7);
     const double sigma_e_v = sqrt(beta_star_e_v * 2.0e-7);
-    const double sigma_e_l = 0.9;
+    const double sigma_e_l = 0.1;
 
     HepMCGen->set_beam_bunch_width(
         std::vector<double>{sigma_p_h, sigma_p_v, sigma_p_l},

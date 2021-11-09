@@ -33,7 +33,7 @@
 /vis/viewer/set/viewpointThetaPhi 240 -40
 /vis/viewer/addCutawayPlane 0 0 0 m 0 -1 0
 /vis/viewer/addCutawayPlane 0 0 0 m -1 -1 
-/vis/scene/add/magneticField
+# /vis/scene/add/magneticField
 # our world is 4x4 meters, the detector is about 1m across
 # zooming by 4 makes it fill the display
 /vis/viewer/zoom 1.5

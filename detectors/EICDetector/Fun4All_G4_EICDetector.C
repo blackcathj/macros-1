@@ -25,7 +25,7 @@
 R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
-    const int nDetectors = 1,
+    const int nDetectors = 100,
     const string &inputFile = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const string &outputFile = "G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
@@ -280,18 +280,23 @@ int Fun4All_G4_EICDetector(
   // Enable::BGEM = true; // not yet defined in this model
   Enable::RWELL =  (nDetectors>3);
   // barrel tracker
-  Enable::TrackingService = (nDetectors>13);
+  Enable::TrackingService = (nDetectors>12);
   // Enable::TrackingService_VERBOSITY = INT_MAX - 10;
   Enable::BARREL = (nDetectors>2);
   // fst
   Enable::FST =  (nDetectors>4);
 
   // TOFs
-  Enable::FTTL =  (nDetectors>9);
-  Enable::ETTL =  (nDetectors>10);
-  Enable::CTTL =  (nDetectors>11);
-  G4TTL::SETTING::optionCEMC = false;
-  G4TTL::SETTING::optionGeo = 1;
+  Enable::FTTL =  (nDetectors>7);
+  Enable::ETTL =  (nDetectors>9);
+  Enable::CTTL =  (nDetectors>10);
+
+  //mRPC TOFs
+  Enable::BTOF = false;
+  Enable::ETOF = false;
+  Enable::HTOF = false;
+  Enable::ETOF_GAS = Enable::ETOF && true;
+  Enable::HTOF_GAS = Enable::HTOF && true;
 
   Enable::TRACKING = true;
 //  Enable::TRACKING_EVAL = Enable::TRACKING && true;
@@ -329,7 +334,7 @@ int Fun4All_G4_EICDetector(
   Enable::HCALOUT_EVAL = Enable::HCALOUT_CLUSTER && true;
 
   // EICDetector geometry - barrel
-  Enable::DIRC =  (nDetectors>6);
+  Enable::DIRC =  (nDetectors>13);
   Enable::DIRC_RECO = Enable::DIRC && false;
   // Enable::DIRC_VERBOSITY = 2;
 
@@ -339,7 +344,7 @@ int Fun4All_G4_EICDetector(
   // Enable::RICH_VERBOSITY = 2;
 
   // EICDetector geometry - 'electron' direction
-  Enable::mRICH =  (nDetectors>7);
+  Enable::mRICH =  (nDetectors>6);
   Enable::mRICH_RECO = Enable::DIRC && false;
   // Enable::mRICH_VERBOSITY = 2;
 
@@ -354,7 +359,6 @@ int Fun4All_G4_EICDetector(
   Enable::DRCALO_TOWER = Enable::DRCALO_CELL && true;
   Enable::DRCALO_CLUSTER = Enable::DRCALO_TOWER && true;
   Enable::DRCALO_EVAL = Enable::DRCALO_CLUSTER && false;
-  G4TTL::SETTING::optionDR = 1;
 
   Enable::LFHCAL = (nDetectors>20);
   Enable::LFHCAL_ABSORBER = false;
@@ -364,11 +368,10 @@ int Fun4All_G4_EICDetector(
   Enable::LFHCAL_EVAL = Enable::LFHCAL_CLUSTER && true;
 
   // EICDetector geometry - 'electron' direction
-  Enable::EEMCH = (nDetectors>12);
+  Enable::EEMCH = (nDetectors>11);
   Enable::EEMCH_TOWER = Enable::EEMCH && false;
   Enable::EEMCH_CLUSTER = Enable::EEMCH_TOWER && true;
   Enable::EEMCH_EVAL = Enable::EEMCH_CLUSTER && true;
-  G4TTL::SETTING::optionEEMCH = Enable::EEMCH && true;
 
   Enable::EHCAL = (nDetectors>18);
   Enable::EHCAL_CELL = Enable::EHCAL && false;
@@ -400,6 +403,14 @@ int Fun4All_G4_EICDetector(
   // B0
   // Enable::B0_DISABLE_HITPLANE = true;
   // Enable::B0_FULLHITPLANE = true;
+
+  // RP
+  // Enable::RP_DISABLE_HITPLANE = true;
+  // Enable::RP_FULLHITPLANE = true;
+
+  // RP after 2nd focus for IP8 only
+  // Enable::RP2nd_DISABLE_HITPLANE = true;
+  // Enable::RP2nd_FULLHITPLANE = true;
 
   // Enabling the event evaluator?
   Enable::EVENT_EVAL = true;

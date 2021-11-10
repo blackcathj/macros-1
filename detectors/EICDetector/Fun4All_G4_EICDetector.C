@@ -648,7 +648,7 @@ int Fun4All_G4_EICDetector(
     int phibins = 313+1;
 //    int phibins = 17 + 1;
 
-      for (double eta = -4.3; eta <= +4.3; eta += .02)
+      for (double eta = -4.3; eta <= +4.3; eta += .005)
 //      for (double eta = -3.5; eta <= +3.5; eta += .5)
     {
       const double theta = 2 * atan(exp(-eta));

@@ -274,8 +274,8 @@ int Fun4All_G4_EICDetector(
   Enable::HFARBWD_VIRTUAL_DETECTORS = true;
 
   // gems
-  Enable::EGEM = true;
-  Enable::FGEM = true; // deactivated as it's replaced by a FTTL layer
+  Enable::EGEM = false;
+  Enable::FGEM = false; // deactivated as it's replaced by a FTTL layer
   // Enable::BGEM = true; // not yet defined in this model
   Enable::RWELL = true;
   // barrel tracker
@@ -311,22 +311,22 @@ int Fun4All_G4_EICDetector(
   G4TRACKING::PROJECTION_FHCAL = true;
   G4TRACKING::PROJECTION_LFHCAL = true;
 
-  Enable::BECAL = true;
+  Enable::BECAL = false;
   Enable::BECAL_CELL = Enable::BECAL && true;
   Enable::BECAL_TOWER = Enable::BECAL_CELL && true;
   Enable::BECAL_CLUSTER = Enable::BECAL_TOWER && true;
   Enable::BECAL_EVAL = Enable::BECAL_CLUSTER && true;
 
-  Enable::HCALIN = true;
+  Enable::HCALIN = false;
   //  Enable::HCALIN_ABSORBER = true;
   Enable::HCALIN_CELL = Enable::HCALIN && true;
   Enable::HCALIN_TOWER = Enable::HCALIN_CELL && true;
   Enable::HCALIN_CLUSTER = Enable::HCALIN_TOWER && true;
   Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
 
-  Enable::MAGNET = true;
+  Enable::MAGNET = false;
 
-  Enable::HCALOUT = true;
+  Enable::HCALOUT = false;
   //  Enable::HCALOUT_ABSORBER = true;
   Enable::HCALOUT_CELL = Enable::HCALOUT && true;
   Enable::HCALOUT_TOWER = Enable::HCALOUT_CELL && true;
@@ -353,7 +353,7 @@ int Fun4All_G4_EICDetector(
   Enable::mRICH_RECO = Enable::mRICH && true;
   // Enable::mRICH_VERBOSITY = 2;
 
-  Enable::FEMC = true;
+  Enable::FEMC = false;
   //  Enable::FEMC_ABSORBER = true;
   Enable::FEMC_TOWER = Enable::FEMC && true;
   Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
@@ -365,7 +365,7 @@ int Fun4All_G4_EICDetector(
   Enable::DRCALO_CLUSTER = Enable::DRCALO_TOWER && true;
   Enable::DRCALO_EVAL = Enable::DRCALO_CLUSTER && false;
 
-  Enable::LFHCAL = true;
+  Enable::LFHCAL = false;
   Enable::LFHCAL_ABSORBER = false;
   Enable::LFHCAL_CELL = Enable::LFHCAL && true;
   Enable::LFHCAL_TOWER = Enable::LFHCAL_CELL && true;
@@ -378,7 +378,7 @@ int Fun4All_G4_EICDetector(
   Enable::EEMCH_CLUSTER = Enable::EEMCH_TOWER && true;
   Enable::EEMCH_EVAL = Enable::EEMCH_CLUSTER && true;
 
-  Enable::EHCAL = true;
+  Enable::EHCAL = false;
   Enable::EHCAL_CELL = Enable::EHCAL && true;
   Enable::EHCAL_TOWER = Enable::EHCAL_CELL && true;
   Enable::EHCAL_CLUSTER = Enable::EHCAL_TOWER && true;

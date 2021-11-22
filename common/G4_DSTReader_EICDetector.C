@@ -47,6 +47,9 @@ void G4DSTreader_EICDetector(const string &outputFile = "G4sPHENIXCells.root")
 
   if (G4DSTREADER::save_g4_raw)
   {
+    ana->AddNode("TrackingService");
+
+
     if (Enable::PIPE && Enable::PIPE_ABSORBER)
     {
       ana->AddNode("PIPE");
@@ -62,12 +65,10 @@ void G4DSTreader_EICDetector(const string &outputFile = "G4sPHENIXCells.root")
     if (Enable::FTTL)
     {
       ana->AddNode("FTTL_0");
-      ana->AddNode("FTTL_1");
     }
     if (Enable::ETTL)
     {
       ana->AddNode("ETTL_0");
-      ana->AddNode("ETTL_1");
     }
     if (Enable::CTTL)
     {
@@ -81,8 +82,11 @@ void G4DSTreader_EICDetector(const string &outputFile = "G4sPHENIXCells.root")
     }
     if (Enable::BARREL)
     {
-      ana->AddNode("SVTX");
-      ana->AddNode("BARR");
+      ana->AddNode("SVTX_0");
+      ana->AddNode("SVTX_1");
+      ana->AddNode("SVTX_2");
+      ana->AddNode("BARR_0");
+      ana->AddNode("BARR_1");
     }
     if (Enable::FST)
     {
@@ -91,10 +95,10 @@ void G4DSTreader_EICDetector(const string &outputFile = "G4sPHENIXCells.root")
       ana->AddNode("FST_2");
       ana->AddNode("FST_3");
       ana->AddNode("FST_4");
-      ana->AddNode("EFST_0");
-      ana->AddNode("EFST_1");
-      ana->AddNode("EFST_2");
-      ana->AddNode("EFST_3");
+      ana->AddNode("EST_0");
+      ana->AddNode("EST_1");
+      ana->AddNode("EST_2");
+      ana->AddNode("EST_3");
     }
 //
 //    if (Enable::CEMC)
@@ -144,10 +148,10 @@ void G4DSTreader_EICDetector(const string &outputFile = "G4sPHENIXCells.root")
 //        ana->AddNode("ABSORBER_FEMC");
 //    }
 //
-//    if (Enable::EEMC)
-//    {
-//      ana->AddNode("EEMC");
-//    }
+    if (Enable::EEMC)
+    {
+      ana->AddNode("EEMC");
+    }
     if (Enable::DIRC)
     {
       ana->AddNode("hpDIRC");

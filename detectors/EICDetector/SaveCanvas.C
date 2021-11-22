@@ -103,9 +103,9 @@ SaveCanvas(TCanvas * c, TString name = "", Bool_t bEPS = kTRUE)
     {
 //      c->Print(name + ".pdf");
 
-      float x = 20;
-      float y = 20;
-      gStyle->GetPaperSize(x, y);
+      //float x = 20;
+      //float y = 20;
+      //gStyle->GetPaperSize(x, y);
 
       gStyle->SetPaperSize(c->GetWindowWidth() / 72 * 2.54,
           c->GetWindowHeight() / 72 * 2.54);
@@ -115,7 +115,7 @@ SaveCanvas(TCanvas * c, TString name = "", Bool_t bEPS = kTRUE)
 //       gSystem->Exec("rm -fv " +  name + ".svg");
       c->Print(name + ".pdf");
 
-      gStyle->SetPaperSize(x, y);
+      // gStyle->SetPaperSize(x, y);
     }
     c->Print(name+".C");
 }

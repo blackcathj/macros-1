@@ -299,7 +299,7 @@ int Fun4All_G4_EICDetector(
   Enable::HTOF_GAS = Enable::HTOF && true;
 
   Enable::TRACKING = true;
-  Enable::TRACKING_EVAL = Enable::TRACKING && true;
+//  Enable::TRACKING_EVAL = Enable::TRACKING && true;
   G4TRACKING::DISPLACED_VERTEX = true;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
                                         // projections to calorimeters
   G4TRACKING::PROJECTION_EEMC = true;
@@ -336,14 +336,14 @@ int Fun4All_G4_EICDetector(
 
   // EICDetector geometry - barrel
   Enable::DIRC = true;
-  Enable::DIRC_RECO = Enable::DIRC && true;
+//  Enable::DIRC_RECO = Enable::DIRC && true;
 
   Enable::BMMG = false;
   // Enable::DIRC_VERBOSITY = 2;
 
   // EICDetector geometry - 'hadron' direction
   Enable::RICH = true;
-  Enable::RICH_RECO = Enable::RICH && true;
+//  Enable::RICH_RECO = Enable::RICH && true;
 
   Enable::TRD = false;
   Enable::TRD_GAS = false;
@@ -351,7 +351,7 @@ int Fun4All_G4_EICDetector(
 
   // EICDetector geometry - 'electron' direction
   Enable::mRICH = true;
-  Enable::mRICH_RECO = Enable::mRICH && true;
+//  Enable::mRICH_RECO = Enable::mRICH && true;
   // Enable::mRICH_VERBOSITY = 2;
 
   Enable::FEMC = false;
@@ -377,7 +377,7 @@ int Fun4All_G4_EICDetector(
   Enable::EEMCH = true;
   Enable::EEMCH_TOWER = Enable::EEMCH && true;
   Enable::EEMCH_CLUSTER = Enable::EEMCH_TOWER && true;
-  Enable::EEMCH_EVAL = Enable::EEMCH_CLUSTER && true;
+//  Enable::EEMCH_EVAL = Enable::EEMCH_CLUSTER && true;
 
   Enable::EHCAL = false;
   Enable::EHCAL_CELL = Enable::EHCAL && true;
@@ -394,7 +394,7 @@ int Fun4All_G4_EICDetector(
   Enable::GLOBAL_FASTSIM = true;
 
   // jet reconstruction
-  Enable::FWDJETS = true;
+//  Enable::FWDJETS = true;
   Enable::FWDJETS_EVAL = Enable::FWDJETS && false;
 
   // new settings using Enable namespace in GlobalVariables.C

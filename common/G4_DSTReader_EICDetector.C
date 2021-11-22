@@ -148,7 +148,7 @@ void G4DSTreader_EICDetector(const string &outputFile = "G4sPHENIXCells.root")
 //        ana->AddNode("ABSORBER_FEMC");
 //    }
 //
-    if (Enable::EEMC)
+    if (Enable::EEMC or Enable::EEMCH)
     {
       ana->AddNode("EEMC");
     }

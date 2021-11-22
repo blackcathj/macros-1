@@ -25,7 +25,7 @@
 R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
-    const int nEvents = 1,
+    const int nEvents = 1000,
     const string &inputFile = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const string &outputFile = "G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
@@ -93,7 +93,7 @@ int Fun4All_G4_EICDetector(
   //INPUTEMBED::listfile[0] = embed_input_file;
 
   // Use Pythia 8
-  Input::PYTHIA8 = true;
+//  Input::PYTHIA8 = true;
   PYTHIA8::config_file = "./phpythia8_ep.cfg";
 
   // Use Pythia 6
@@ -103,7 +103,7 @@ int Fun4All_G4_EICDetector(
   //   Input::SARTRE = true;
 
   // Simple multi particle generator in eta/phi/pt ranges
-  // Input::SIMPLE = true;
+   Input::SIMPLE = true;
   // Input::SIMPLE_NUMBER = 2; // if you need 2 of them
   // Input::SIMPLE_VERBOSITY = 1;
 
@@ -142,8 +142,8 @@ int Fun4All_G4_EICDetector(
   // add the settings for other with [1], next with [2]...
   if (Input::SIMPLE)
   {
-    INPUTGENERATOR::SimpleEventGenerator[0]->add_particles("mu-", 10);
-    INPUTGENERATOR::SimpleEventGenerator[0]->add_particles("mu+", 10);
+    INPUTGENERATOR::SimpleEventGenerator[0]->add_particles("mu-", 50);
+    INPUTGENERATOR::SimpleEventGenerator[0]->add_particles("mu+", 50);
     if (Input::HEPMC || Input::EMBED)
     {
       INPUTGENERATOR::SimpleEventGenerator[0]->set_reuse_existing_vertex(true);
@@ -298,7 +298,7 @@ int Fun4All_G4_EICDetector(
   Enable::ETOF_GAS = Enable::ETOF && true;
   Enable::HTOF_GAS = Enable::HTOF && true;
 
-//  Enable::TRACKING = true;
+  Enable::TRACKING = true;
   Enable::TRACKING_EVAL = Enable::TRACKING && true;
   G4TRACKING::DISPLACED_VERTEX = true;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
                                         // projections to calorimeters

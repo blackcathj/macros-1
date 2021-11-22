@@ -164,7 +164,7 @@ void Tracking_Reco()
     TRACKING::ProjectionNames.insert("EHCAL");
   }
 
-  se->registerSubsystem(TRACKING::FastKalmanFilter);
+//  se->registerSubsystem(TRACKING::FastKalmanFilter);
 
   // next, tracks with partial usage of the tracker stack
   if (TRACKING::FastKalmanFilterInnerTrack == nullptr)
@@ -176,7 +176,7 @@ void Tracking_Reco()
   TRACKING::FastKalmanFilterInnerTrack->Verbosity(verbosity);
   TRACKING::FastKalmanFilterInnerTrack->set_trackmap_out_name("InnerTrackMap");
   TRACKING::FastKalmanFilterInnerTrack->enable_vertexing(false);
-  se->registerSubsystem(TRACKING::FastKalmanFilterInnerTrack);
+//  se->registerSubsystem(TRACKING::FastKalmanFilterInnerTrack);
 
   if (TRACKING::FastKalmanFilterSiliconTrack == nullptr)
   {
@@ -187,7 +187,7 @@ void Tracking_Reco()
   TRACKING::FastKalmanFilterSiliconTrack->Verbosity(verbosity);
   TRACKING::FastKalmanFilterSiliconTrack->set_trackmap_out_name("SiliconTrackMap");
   TRACKING::FastKalmanFilterSiliconTrack->enable_vertexing(false);
-  se->registerSubsystem(TRACKING::FastKalmanFilterSiliconTrack);
+//  se->registerSubsystem(TRACKING::FastKalmanFilterSiliconTrack);
   return;
 }
 

@@ -60,8 +60,8 @@ namespace G4FEMC
 
 void FEMCInit()
 {
-  BlackHoleGeometry::max_radius = std::max(BlackHoleGeometry::max_radius, G4FEMC::outer_radius);
-  BlackHoleGeometry::max_z = std::max(BlackHoleGeometry::max_z, G4FEMC::Gz0 + G4FEMC::Gdz / 2.);
+  BlackHoleGeometry::max_radius = std::max(BlackHoleGeometry::max_radius,200.);
+  BlackHoleGeometry::max_z = std::max(BlackHoleGeometry::max_z, 450.);
 }
 
 void FEMCSetup(PHG4Reco *g4Reco, const int absorberactive = 0)

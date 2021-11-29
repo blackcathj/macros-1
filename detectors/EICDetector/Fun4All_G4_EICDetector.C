@@ -25,7 +25,7 @@
 R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
-    const int nEvents = 50000,
+    const int nEvents = 10000,
     const string &inputFile = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const string &outputFile = "G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
@@ -155,9 +155,9 @@ int Fun4All_G4_EICDetector(
       INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_mean(0., 0., 0.);
       INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_width(0., 0., 5.);
     }
-    INPUTGENERATOR::SimpleEventGenerator[0]->set_eta_range(-4, -3);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_eta_range(3, 5);
     INPUTGENERATOR::SimpleEventGenerator[0]->set_phi_range(-M_PI, M_PI);
-    INPUTGENERATOR::SimpleEventGenerator[0]->set_p_range(18, 18.);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_p_range(10, 10.);
   }
   // Upsilons
   // if you run more than one of these Input::UPSILON_NUMBER > 1
@@ -352,11 +352,11 @@ int Fun4All_G4_EICDetector(
 //  Enable::mRICH_RECO = Enable::mRICH && true;
 //  // Enable::mRICH_VERBOSITY = 2;
 
-//  Enable::FEMC = true;
-//  //  Enable::FEMC_ABSORBER = true;
-//  Enable::FEMC_TOWER = Enable::FEMC && true;
-//  Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
-//  Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
+  Enable::FEMC = true;
+  //  Enable::FEMC_ABSORBER = true;
+  Enable::FEMC_TOWER = Enable::FEMC && true;
+  Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
+  Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
 
 //  //Enable::DRCALO = false;
 //  Enable::DRCALO_CELL = Enable::DRCALO && true;
@@ -371,11 +371,11 @@ int Fun4All_G4_EICDetector(
 //  Enable::LFHCAL_CLUSTER = Enable::LFHCAL_TOWER && true;
 //  Enable::LFHCAL_EVAL = Enable::LFHCAL_CLUSTER && true;
 //
-  // EICDetector geometry - 'electron' direction
-  Enable::EEMCH = true;
-  Enable::EEMCH_TOWER = Enable::EEMCH && true;
-  Enable::EEMCH_CLUSTER = Enable::EEMCH_TOWER && true;
-  Enable::EEMCH_EVAL = Enable::EEMCH_CLUSTER && true;
+//  // EICDetector geometry - 'electron' direction
+//  Enable::EEMCH = true;
+//  Enable::EEMCH_TOWER = Enable::EEMCH && true;
+//  Enable::EEMCH_CLUSTER = Enable::EEMCH_TOWER && true;
+//  Enable::EEMCH_EVAL = Enable::EEMCH_CLUSTER && true;
 //
 //  Enable::EHCAL = true;
 //  Enable::EHCAL_CELL = Enable::EHCAL && true;

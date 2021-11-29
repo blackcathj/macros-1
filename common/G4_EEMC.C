@@ -69,10 +69,10 @@ void EEMCInit()
   }
   else
   {
-    BlackHoleGeometry::max_radius = std::max(BlackHoleGeometry::max_radius, 65.6);
+    BlackHoleGeometry::max_radius = std::max(BlackHoleGeometry::max_radius, 80.);
   }
   // from towerMap_EEMC_v006.txt
-  BlackHoleGeometry::min_z = std::min(BlackHoleGeometry::min_z, G4EEMC::Gz0 - G4EEMC::Gdz / 2.);
+  BlackHoleGeometry::min_z = std::min(BlackHoleGeometry::min_z,-250. );
 }
 
 void EEMCSetup(PHG4Reco *g4Reco)

@@ -270,12 +270,12 @@ int Fun4All_G4_EICDetector(
   Enable::HFARFWD_MAGNETS = true;
   Enable::HFARFWD_VIRTUAL_DETECTORS = true;
 
-  Enable::HFARBWD_MAGNETS = true;
-  Enable::HFARBWD_VIRTUAL_DETECTORS = true;
+//  Enable::HFARBWD_MAGNETS = true;
+//  Enable::HFARBWD_VIRTUAL_DETECTORS = true;
 
   // gems
-  Enable::EGEM = true;
-  Enable::FGEM = true; // deactivated as it's replaced by a FTTL layer
+//  Enable::EGEM = true;
+//  Enable::FGEM = true; // deactivated as it's replaced by a FTTL layer
   // Enable::BGEM = true; // not yet defined in this model
   Enable::RWELL = true;
   // barrel tracker
@@ -322,7 +322,7 @@ int Fun4All_G4_EICDetector(
   Enable::HCALIN_CELL = Enable::HCALIN && true;
   Enable::HCALIN_TOWER = Enable::HCALIN_CELL && true;
   Enable::HCALIN_CLUSTER = Enable::HCALIN_TOWER && true;
-  Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
+//  Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
 
   Enable::MAGNET = true;
 
@@ -357,36 +357,36 @@ int Fun4All_G4_EICDetector(
   //  Enable::FEMC_ABSORBER = true;
   Enable::FEMC_TOWER = Enable::FEMC && true;
   Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
-  Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
+//  Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
 
   //Enable::DRCALO = false;
   Enable::DRCALO_CELL = Enable::DRCALO && true;
   Enable::DRCALO_TOWER = Enable::DRCALO_CELL && true;
   Enable::DRCALO_CLUSTER = Enable::DRCALO_TOWER && true;
-  Enable::DRCALO_EVAL = Enable::DRCALO_CLUSTER && false;
+//  Enable::DRCALO_EVAL = Enable::DRCALO_CLUSTER && false;
 
   Enable::LFHCAL = true;
   Enable::LFHCAL_ABSORBER = false;
   Enable::LFHCAL_CELL = Enable::LFHCAL && true;
   Enable::LFHCAL_TOWER = Enable::LFHCAL_CELL && true;
   Enable::LFHCAL_CLUSTER = Enable::LFHCAL_TOWER && true;
-  Enable::LFHCAL_EVAL = Enable::LFHCAL_CLUSTER && true;
+//  Enable::LFHCAL_EVAL = Enable::LFHCAL_CLUSTER && true;
 
   // EICDetector geometry - 'electron' direction
   Enable::EEMCH = true;
   Enable::EEMCH_TOWER = Enable::EEMCH && true;
   Enable::EEMCH_CLUSTER = Enable::EEMCH_TOWER && true;
-  Enable::EEMCH_EVAL = Enable::EEMCH_CLUSTER && true;
+//  Enable::EEMCH_EVAL = Enable::EEMCH_CLUSTER && true;
 
-  Enable::EHCAL = true;
-  Enable::EHCAL_CELL = Enable::EHCAL && true;
-  Enable::EHCAL_TOWER = Enable::EHCAL_CELL && true;
-  Enable::EHCAL_CLUSTER = Enable::EHCAL_TOWER && true;
-  Enable::EHCAL_EVAL = Enable::EHCAL_CLUSTER && true;
+//  Enable::EHCAL = true;
+//  Enable::EHCAL_CELL = Enable::EHCAL && true;
+//  Enable::EHCAL_TOWER = Enable::EHCAL_CELL && true;
+//  Enable::EHCAL_CLUSTER = Enable::EHCAL_TOWER && true;
+//  Enable::EHCAL_EVAL = Enable::EHCAL_CLUSTER && true;
 
   Enable::FFR_EVAL = Enable::HFARFWD_MAGNETS && Enable::HFARFWD_VIRTUAL_DETECTORS && true;
 
-  Enable::PLUGDOOR = false;
+  Enable::PLUGDOOR = true;
 
   // Other options
   Enable::GLOBAL_RECO = G4TRACKING::DISPLACED_VERTEX;  // use reco vertex for global event vertex
@@ -402,27 +402,27 @@ int Fun4All_G4_EICDetector(
   //BlackHoleGeometry::visible = true;
 
   // ZDC
-  // Enable::ZDC = true;
-  // Enable::ZDC_DISABLE_BLACKHOLE = true;
+//   Enable::ZDC = true;
+   Enable::ZDC_DISABLE_BLACKHOLE = true;
 
   // B0
-  // Enable::B0_DISABLE_HITPLANE = true;
-  // Enable::B0_FULLHITPLANE = true;
+   Enable::B0_DISABLE_HITPLANE = true;
+   Enable::B0_FULLHITPLANE = true;
 
-  // Enable::B0ECALTOWERS = true;  //To Construct Towers of B0ECal instead of one single volume
-  // Enable::B0ECAL = Enable::B0_DISABLE_HITPLANE && true;
-  // Enable::B0ECAL_CELL = Enable::B0ECAL && true;
-  // Enable::B0ECAL_TOWER = Enable::B0ECAL_CELL && true;
-  // Enable::B0ECAL_CLUSTER = Enable::B0ECAL_TOWER && true;
-  // Enable::B0ECAL_EVAL = Enable::B0ECAL_CLUSTER && true;
+   Enable::B0ECALTOWERS = true;  //To Construct Towers of B0ECal instead of one single volume
+   Enable::B0ECAL = Enable::B0_DISABLE_HITPLANE && true;
+   Enable::B0ECAL_CELL = Enable::B0ECAL && true;
+   Enable::B0ECAL_TOWER = Enable::B0ECAL_CELL && true;
+   Enable::B0ECAL_CLUSTER = Enable::B0ECAL_TOWER && true;
+//   Enable::B0ECAL_EVAL = Enable::B0ECAL_CLUSTER && true;
     
   // RP
-  // Enable::RP_DISABLE_HITPLANE = true;
-  // Enable::RP_FULLHITPLANE = true;
+   Enable::RP_DISABLE_HITPLANE = true;
+   Enable::RP_FULLHITPLANE = true;
 
   // RP after 2nd focus for IP8 only
-  // Enable::RP2nd_DISABLE_HITPLANE = true;
-  // Enable::RP2nd_FULLHITPLANE = true;
+   Enable::RP2nd_DISABLE_HITPLANE = true;
+   Enable::RP2nd_FULLHITPLANE = true;
 
   // Enabling the event evaluator?
   Enable::EVENT_EVAL = false;

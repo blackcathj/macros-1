@@ -241,7 +241,7 @@ double TrackingService(PHG4Reco *g4Reco, double radius)
   double h_cone_ends = 110.;
 
   /* Below are the support structures beyond EGEM*/
-  cylinders.push_back(new ServiceProperties("ETrackingCylinderService_1", 9, 0, 0.42, 0.32, shellX0, 0, -400, -310, 270, 0));
+//  cylinders.push_back(new ServiceProperties("ETrackingCylinderService_1", 9, 0, 0.42, 0.32, shellX0, 0, -400, -310, 270, 0));
   cones.push_back(new ServiceProperties("ETrackingConeService_1", 9, 0, 0.42, 0.32, shellX0, 0, -310, -300, 270, 68));
   cylinders.push_back(new ServiceProperties("ETrackingCylinderService_2", 17, 0, 0.56, 0.64, shellX0, 0, -300, -200, 68, 0));
   cylinders.push_back(new ServiceProperties("ETrackingCylinderService_3", 15, 0, 0.56, 0.56, shellX0, 0, -200, -147.47, 68, 0));

@@ -17,6 +17,7 @@
 #include <fun4all/Fun4AllDstOutputManager.h>
 #include <fun4all/Fun4AllOutputManager.h>
 #include <fun4all/Fun4AllServer.h>
+#include <g4main/PHG4ScoringManager.h>
 
 #include <phool/recoConsts.h>
 
@@ -447,7 +448,7 @@ int Fun4All_G4_EICDetector(
   //---------------
   // World Settings
   //---------------
-  //  G4WORLD::PhysicsList = "FTFP_BERT"; //FTFP_BERT_HP best for calo
+    G4WORLD::PhysicsList = "FTFP_BERT_HP"; //FTFP_BERT_HP best for calo
   //  G4WORLD::WorldMaterial = "G4_AIR"; // set to G4_GALACTIC for material scans
 
   //---------------
@@ -477,6 +478,93 @@ int Fun4All_G4_EICDetector(
   if (!Input::READHITS)
   {
     G4Setup();
+
+    // charged particle energy-range cut off in 1mm POLYETHYLENE ~ 0.1 g/cm2
+    // electron:  ESTAR database,
+    //            Ek = 3.500E-01 MeV, CSDA Range 9.979E-02 g/cm2
+    //            Ek = 1 MeV, CSDA Range 4.155E-01 g/cm2
+    // proton:    PSTAR database,
+    //            Ek = 9.500E+00 MeV, CSDA Range 1.029E-01  g/cm2
+    //            Ek = 1 MeV, CSDA Range 2.112E-03 g/cm2
+
+    gSystem->Load("libg4testbench.so");
+    // G4 scoring based flux analysis
+
+    PHG4ScoringManager *g4score = new PHG4ScoringManager();
+    g4score->setOutputFileName(string(outputFile) + "_g4score.root");
+    g4score->Verbosity(1);
+
+    g4score->G4Command("/score/create/cylinderMesh FullCylinder");
+    // given in dr dz
+    g4score->G4Command("/score/mesh/cylinderSize 288. 500. cm");
+    //    00118   //   Division command
+    //    00119   mBinCmd = new G4UIcommand("/score/mesh/nBin",this);
+    //    00120   mBinCmd->SetGuidance("Define segments of the scoring mesh.");
+    //    00121   mBinCmd->SetGuidance("[usage] /score/mesh/nBin");
+    //    00122   mBinCmd->SetGuidance(" In case of boxMesh, parameters are given in");
+    //    00123   mBinCmd->SetGuidance("   Ni  :(int) Number of bins i (in x-axis) ");
+    //    00124   mBinCmd->SetGuidance("   Nj  :(int) Number of bins j (in y-axis) ");
+    //    00125   mBinCmd->SetGuidance("   Nk  :(int) Number of bins k (in z-axis) ");
+    //    00126   mBinCmd->SetGuidance(" In case of cylinderMesh, parameters are given in");
+    //    00127   mBinCmd->SetGuidance("   Nr  :(int) Number of bins in radial axis ");
+    //    00128   mBinCmd->SetGuidance("   Nz  :(int) Number of bins in z axis ");
+    //    00129   mBinCmd->SetGuidance("   Nphi:(int) Number of bins in phi axis ");
+    g4score->G4Command("/score/mesh/nBin 90 312 8");
+
+    g4score->G4Command("/score/quantity/energyDeposit edep");
+
+    g4score->G4Command("/score/quantity/doseDeposit dose");
+
+    g4score->G4Command("/score/quantity/cellFlux flux_charged");
+    g4score->G4Command("/score/filter/charged");
+
+    g4score->G4Command("/score/quantity/cellFlux flux_charged_EkMin1MeV");
+    g4score->G4Command("/score/filter/particleWithKineticEnergy charged_EkMin1MeV 1 1000000 MeV pi+ pi- kaon+ kaon- proton anti_proton mu+  mu-  e+  e-  alpha");
+
+    g4score->G4Command("/score/quantity/cellFlux flux_charged_EkMin20MeV");
+    g4score->G4Command("/score/filter/particleWithKineticEnergy charged_EkMin20MeV 20 1000000 MeV pi+ pi- kaon+ kaon- proton anti_proton mu+  mu-  e+  e-  alpha");
+
+    g4score->G4Command("/score/quantity/cellFlux flux_neutron");
+    g4score->G4Command("/score/filter/particle filter_neutron neutron anti_neutron");
+
+    g4score->G4Command("/score/quantity/cellFlux flux_neutron_EkMin100keV");
+    g4score->G4Command("/score/filter/particleWithKineticEnergy HEneutronFilter 0.1 7000000 MeV neutron");
+
+    g4score->G4Command("/score/quantity/cellFlux flux_neutron_EkMin1MeV");
+    g4score->G4Command("/score/filter/particleWithKineticEnergy HEneutronFilter1MeV 1 7000000 MeV neutron");
+
+    g4score->G4Command("/score/close");
+
+    // inner detector zoom-in
+//      g4score->G4Command("/score/create/cylinderMesh VertexCylinder");
+//      g4score->G4Command("/score/mesh/cylinderSize 20. 10. cm");
+//      g4score->G4Command("/score/mesh/nBin 200 10 256");
+//
+//      g4score->G4Command("/score/quantity/energyDeposit edep");
+//
+//      g4score->G4Command("/score/quantity/doseDeposit dose");
+//
+//      g4score->G4Command("/score/quantity/cellFlux flux_charged");
+//      g4score->G4Command("/score/filter/charged");
+//
+//      g4score->G4Command("/score/quantity/cellFlux flux_charged_EkMin1MeV");
+////      g4score->G4Command("/score/filter/charged");
+//      g4score->G4Command("/score/filter/particleWithKineticEnergy charged_EkMin1MeV 1 1000000 MeV pi+ pi- kaon+ kaon- proton anti_proton mu+  mu-  e+  e-  alpha");
+//
+//      g4score->G4Command("/score/quantity/cellFlux flux_charged_EkMin20MeV");
+//      g4score->G4Command("/score/filter/particleWithKineticEnergy charged_EkMin20MeV 20 1000000 MeV pi+ pi- kaon+ kaon- proton anti_proton mu+  mu-  e+  e-  alpha");
+//
+//      g4score->G4Command("/score/quantity/cellFlux flux_neutron");
+//      g4score->G4Command("/score/filter/particle filter_neutron neutron anti_neutron");
+//
+//      g4score->G4Command("/score/quantity/cellFlux flux_neutron_EkMin100keV");
+//      g4score->G4Command("/score/filter/particleWithKineticEnergy HEneutronFilter 0.1 7000000 MeV neutron");
+//
+//      g4score->G4Command("/score/close");
+
+    se->registerSubsystem(g4score);
+
+
   }
 
   //------------------

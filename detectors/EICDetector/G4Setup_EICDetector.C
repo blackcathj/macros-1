@@ -183,6 +183,8 @@ int G4Setup()
 
   PHG4Reco *g4Reco = new PHG4Reco();
 
+  g4Reco->setDisableSteppingActions();
+
   WorldInit(g4Reco);
 
   g4Reco->set_rapidity_coverage(1.1);  // according to drawings

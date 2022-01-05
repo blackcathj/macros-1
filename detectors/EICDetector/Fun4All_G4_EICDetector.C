@@ -259,7 +259,7 @@ int Fun4All_G4_EICDetector(
   //======================
   // Global options (enabled for all subsystems - if implemented)
   //  Enable::ABSORBER = true;
-  //  Enable::OVERLAPCHECK = true;
+    Enable::OVERLAPCHECK = true;
   //  Enable::VERBOSITY = 1;
 
   // whether to simulate the Be section of the beam pipe
@@ -298,7 +298,7 @@ int Fun4All_G4_EICDetector(
   Enable::HTOF_GAS = Enable::HTOF && true;
 
 //  Enable::TRACKING = true;
-  Enable::TRACKING_EVAL = Enable::TRACKING && true;
+//  Enable::TRACKING_EVAL = Enable::TRACKING && true;
   G4TRACKING::DISPLACED_VERTEX = true;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
                                         // projections to calorimeters
   G4TRACKING::PROJECTION_EEMC = true;
@@ -340,7 +340,7 @@ int Fun4All_G4_EICDetector(
 
   // EICDetector geometry - 'electron' direction
   Enable::mRICH = true;
-  Enable::mRICH_RECO = Enable::mRICH && true;
+//  Enable::mRICH_RECO = Enable::mRICH && true;
   // Enable::mRICH_VERBOSITY = 2;
   
   // EICDetector geometry - 'electron' direction

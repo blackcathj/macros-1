@@ -125,7 +125,7 @@ void G4Init()
   // load detector/material macros and execute Init() function
   if (Enable::PIPE) PipeInit();
   if (Enable::PLUGDOOR) PlugDoorInit();
-  if (Enable::TRACKING) TrackingInit();
+  TrackingInit(); // always init tracking
   if (Enable::B0TRACKING) B0TrackingInit();
 
   //Farforward/backward
@@ -183,7 +183,7 @@ int G4Setup()
 
   PHG4Reco *g4Reco = new PHG4Reco();
 
-  g4Reco->setDisableSteppingActions();
+  g4Reco->setDisableUserActions(); // speed up dose simulation
 
   WorldInit(g4Reco);
 

@@ -259,7 +259,7 @@ int Fun4All_G4_EICDetector(
   //======================
   // Global options (enabled for all subsystems - if implemented)
   //  Enable::ABSORBER = true;
-    Enable::OVERLAPCHECK = true;
+  //  Enable::OVERLAPCHECK = true;
   //  Enable::VERBOSITY = 1;
 
   // whether to simulate the Be section of the beam pipe
@@ -493,6 +493,12 @@ int Fun4All_G4_EICDetector(
     PHG4ScoringManager *g4score = new PHG4ScoringManager();
     g4score->setOutputFileName(string(outputFile) + "_g4score.root");
     g4score->Verbosity(1);
+
+    g4score->G4Command("/tracking/verbose 6");
+
+    BlackHoleGeometry::max_radius = std::max(BlackHoleGeometry::max_radius, 300.);
+    // extends only to -z
+    BlackHoleGeometry::min_z = std::min(BlackHoleGeometry::min_z, -550.);
 
     g4score->G4Command("/score/create/cylinderMesh FullCylinder");
     // given in dr dz

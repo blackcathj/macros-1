@@ -78,7 +78,7 @@ double Pipe(PHG4Reco* g4Reco,
   cyl->set_int_param("lengthviarapidity", 0);
   cyl->set_double_param("length", be_pipe_length);
   cyl->set_double_param("place_z", be_pipe_center);
-  cyl->set_string_param("material", "G4_Galactic");
+  cyl->set_string_param("material", "G4_H"); // trick to produce a non-volatile dose calculation using thin gas
   cyl->set_double_param("thickness", G4PIPE::be_pipe_radius- G4PIPE::Au_coating_thickness);
   cyl->SuperDetector("PIPE");
   cyl->OverlapCheck(OverlapCheck);
@@ -118,7 +118,7 @@ double Pipe(PHG4Reco* g4Reco,
     if (Enable::IP6)
     {
       PHG4GDMLSubsystem* gdml = new PHG4GDMLSubsystem("ElectronForwardChamber");
-      gdml->set_string_param("GDMPath", string(getenv("CALIBRATIONROOT")) + "/Beam/ConstructSimplifiedBeamChamber.gdml");
+      gdml->set_string_param("GDMPath",   "./ConstructSimplifiedBeamChamber.gdml");
       gdml->set_string_param("TopVolName", "ElectronForwardChamber");
       gdml->OverlapCheck(OverlapCheck);
       g4Reco->registerSubsystem(gdml);
@@ -135,7 +135,7 @@ double Pipe(PHG4Reco* g4Reco,
     if (Enable::IP6)
     {
       PHG4GDMLSubsystem* gdml = new PHG4GDMLSubsystem("HadronForwardChamber");
-      gdml->set_string_param("GDMPath", string(getenv("CALIBRATIONROOT")) + "/Beam/ConstructSimplifiedBeamChamber.gdml");
+      gdml->set_string_param("GDMPath", "./ConstructSimplifiedBeamChamber.gdml");
       gdml->set_string_param("TopVolName", "HadronForwardChamber");
       gdml->OverlapCheck(OverlapCheck);
       g4Reco->registerSubsystem(gdml);

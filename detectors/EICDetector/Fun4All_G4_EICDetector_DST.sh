@@ -1,4 +1,4 @@
-#! /bin/tcsh -f
+#!/bin/tcsh -f
 
 if ( $#argv < 1 ) then 
 	echo "Usage : $0 src_data_file src_dir";

@@ -495,7 +495,7 @@ int Fun4All_G4_EICDetector(
     g4score->setOutputFileName(string(outputFile) + "_g4score.root");
     g4score->Verbosity(1);
 
-    g4score->G4Command("/tracking/verbose 6");
+//    g4score->G4Command("/tracking/verbose 6");
 
     BlackHoleGeometry::max_radius = std::max(BlackHoleGeometry::max_radius, 300.);
     // extends only to -z

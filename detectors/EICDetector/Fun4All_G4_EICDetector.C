@@ -26,8 +26,8 @@
 R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
-    const int nEvents = 1,
-    const string &inputFile = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
+    const int nEvents = 5,
+    const string &inputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/EventGen/pythia.ep.20x250.1Mevents.RadCor=0.root",
     const string &outputFile = "G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const int skip = 0,
@@ -106,7 +106,7 @@ int Fun4All_G4_EICDetector(
   //   Input::SARTRE = true;
 
   // Simple multi particle generator in eta/phi/pt ranges
-  Input::SIMPLE = true;
+  // Input::SIMPLE = true;
   // Input::SIMPLE_NUMBER = 2; // if you need 2 of them
   // Input::SIMPLE_VERBOSITY = 1;
 
@@ -123,7 +123,7 @@ int Fun4All_G4_EICDetector(
   // And/Or read generated particles from file
 
   // eic-smear output
-  // Input::READEIC = true;
+  Input::READEIC = true;
   INPUTREADEIC::filename = inputFile;
 
   // HepMC2 files
@@ -249,7 +249,7 @@ int Fun4All_G4_EICDetector(
   // Enable::DSTOUT = true;
   DstOut::OutputDir = outdir;
   DstOut::OutputFile = outputFile;
-  Enable::DSTOUT_COMPRESS = true;  // Compress DST files
+//  Enable::DSTOUT_COMPRESS = true;  // Compress DST files
 
   //Option to convert DST to human command readable TTree for quick poke around the outputs
   // Enable::DSTREADER = true;
@@ -357,11 +357,11 @@ int Fun4All_G4_EICDetector(
   Enable::PLUGDOOR = false;
 
   // Other options
-  Enable::GLOBAL_RECO = G4TRACKING::DISPLACED_VERTEX;  // use reco vertex for global event vertex
-  Enable::GLOBAL_FASTSIM = true;
+//  Enable::GLOBAL_RECO = G4TRACKING::DISPLACED_VERTEX;  // use reco vertex for global event vertex
+//  Enable::GLOBAL_FASTSIM = true;
 
   // jet reconstruction
-  Enable::FWDJETS = true;
+//  Enable::FWDJETS = true;
   Enable::FWDJETS_EVAL = Enable::FWDJETS && false;
 
   // new settings using Enable namespace in GlobalVariables.C

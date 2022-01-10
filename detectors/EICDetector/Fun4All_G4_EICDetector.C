@@ -480,8 +480,6 @@ int Fun4All_G4_EICDetector(
   // If "readhepMC" is also set, the Upsilons will be embedded in Hijing events, if 'particles" is set, the Upsilons will be embedded in whatever particles are thrown
   if (!Input::READHITS)
   {
-    G4Setup();
-
     // charged particle energy-range cut off in 1mm POLYETHYLENE ~ 0.1 g/cm2
     // electron:  ESTAR database,
     //            Ek = 3.500E-01 MeV, CSDA Range 9.979E-02 g/cm2
@@ -573,6 +571,7 @@ int Fun4All_G4_EICDetector(
 
     se->registerSubsystem(g4score);
 
+    G4Setup();
 
   }
 

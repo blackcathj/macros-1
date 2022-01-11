@@ -328,7 +328,7 @@ int Fun4All_G4_EICDetector(
   // Enable::DIRC_VERBOSITY = 2;
 
   // EICDetector geometry - 'hadron' direction
-  Enable::RICH = true;
+  // Enable::RICH = true;
 //  Enable::RICH_RECO = Enable::RICH && true;
 
   Enable::TRD = false;
@@ -354,7 +354,7 @@ int Fun4All_G4_EICDetector(
 
 //  Enable::FFR_EVAL = Enable::HFARFWD_MAGNETS && Enable::HFARFWD_VIRTUAL_DETECTORS && true;
 
-  Enable::PLUGDOOR = false;
+  Enable::PLUGDOOR = true;
 
   // Other options
 //  Enable::GLOBAL_RECO = G4TRACKING::DISPLACED_VERTEX;  // use reco vertex for global event vertex

@@ -26,7 +26,7 @@
 R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
-    const int nEvents = 10,
+    const int nEvents = 100,
     const int skip = 0,
     const string &inputFile = "phpythia8_BeamGas_MDC1.cfg",
     const string &outputFile = "G4EICDetector.root",
@@ -199,7 +199,61 @@ int Fun4All_G4_EICDetector(
   if (Input::PYTHIA8)
   {
     //! apply EIC beam parameter following EIC CDR
-    Input::ApplyEICBeamParameter(INPUTGENERATOR::Pythia8);
+    // Input::ApplyEICBeamParameter(INPUTGENERATOR::Pythia8);
+
+    // beam gas tune:
+
+
+    //25mrad x-ing as in EIC CDR
+    const double EIC_hadron_crossing_angle = 25e-3;
+    // beta* for 275*x18 collisions
+    // Table 4 of
+    // https://github.com/eic/documents/blob/master/reports/general/Note-Simulations-BeamEffects.pdf
+    const double beta_star_p_h = 80;
+    const double beta_star_p_v = 7.1;
+    const double beta_star_e_h = 59;
+    const double beta_star_e_v = 5.7;
+    // Table 1-2 of
+    // https://github.com/eic/documents/blob/master/reports/general/Note-Simulations-BeamEffects.pdf
+    const double beta_crab_p = 1300e2;
+    const double beta_crab_e = 0;
+
+    // beam gas proton beam rotation
+    INPUTGENERATOR::Pythia8->set_beam_direction_theta_phi(
+        EIC_hadron_crossing_angle,  // beamA_theta
+        M_PI,                       // beamA_phi
+        M_PI - EIC_hadron_crossing_angle,                       // beamB_theta
+        0                           // beamB_phi
+    );
+    // Table 4 of
+    // https://github.com/eic/documents/blob/master/reports/general/Note-Simulations-BeamEffects.pdf
+    INPUTGENERATOR::Pythia8->set_beam_angular_divergence_hv(
+        150e-6, 150e-6,  // proton beam divergence horizontal & vertical
+        0,0   // electron beam divergence horizontal & vertical
+    );
+
+    INPUTGENERATOR::Pythia8->use_beam_bunch_sim(true);
+
+    // angular kick within a bunch as result of crab cavity
+    // Eq 5 of
+    // https://github.com/eic/documents/blob/master/reports/general/Note-Simulations-BeamEffects.pdf
+    INPUTGENERATOR::Pythia8->set_beam_angular_z_coefficient_hv(
+        -EIC_hadron_crossing_angle / 2. / sqrt(beta_star_p_h * beta_crab_p), 0,
+        0, 0);
+
+    // Table 4 of
+    // https://github.com/eic/documents/blob/master/reports/general/Note-Simulations-BeamEffects.pdf
+    const double sigma_p_h = sqrt(beta_star_p_h * 18e-7);
+    const double sigma_p_v = sqrt(beta_star_p_v * 1.6e-7);
+    const double sigma_p_l = 6;
+    const double sigma_e_h = sqrt(beta_star_e_h * 24e-7);
+    const double sigma_e_v = sqrt(beta_star_e_v * 2.0e-7);
+    const double sigma_e_l = 0.9;
+
+    INPUTGENERATOR::Pythia8->set_beam_bunch_width(
+        std::vector<double>{sigma_p_h, sigma_p_v, sigma_p_l}, // large range for beam gas interaction
+        std::vector<double>{10, 10, 500}); // approximiate beam gas profile
+
   }
   // Sartre
   if (Input::SARTRE)

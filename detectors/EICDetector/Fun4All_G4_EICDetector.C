@@ -419,6 +419,7 @@ int Fun4All_G4_EICDetector(
 ////  Enable::FWDJETS = true;
 //  Enable::FWDJETS_EVAL = Enable::FWDJETS && false;
 
+
   // new settings using Enable namespace in GlobalVariables.C
   Enable::BLACKHOLE = true;
   //Enable::BLACKHOLE_SAVEHITS = false; // turn off saving of bh hits

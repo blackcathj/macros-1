@@ -28,7 +28,7 @@ R__LOAD_LIBRARY(libfun4all.so)
 int Fun4All_G4_EICDetector(
     const int nEvents = 10,
     const int skip = 0,
-    const string &inputFile = "/phenix/u/jinhuang/links/sPHENIX_work/EIC/EventGen/pythia.ep.20x250.1Mevents.RadCor=0.root",
+    const string &inputFile = "phpythia8_BeamGas_MDC1.cfg",
     const string &outputFile = "G4EICDetector.root",
     const string &embed_input_file = "https://www.phenix.bnl.gov/WWW/publish/phnxbld/sPHENIX/files/sPHENIX_G4Hits_sHijing_9-11fm_00000_00010.root",
     const string &outdir = ".")
@@ -97,7 +97,8 @@ int Fun4All_G4_EICDetector(
   //INPUTEMBED::listfile[0] = embed_input_file;
 
   // Use Pythia 8
-  // Input::PYTHIA8 = true;
+  Input::PYTHIA8 = true;
+  PYTHIA8::config_file = inputFile;
 
   // Use Pythia 6
   // Input::PYTHIA6 = true;
@@ -123,7 +124,7 @@ int Fun4All_G4_EICDetector(
   // And/Or read generated particles from file
 
   // eic-smear output
-  Input::READEIC = true;
+  // Input::READEIC = true;
   INPUTREADEIC::filename = inputFile;
 
   // HepMC2 files

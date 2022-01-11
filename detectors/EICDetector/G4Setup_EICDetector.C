@@ -117,7 +117,7 @@ void G4Init()
     cout << "Can not enable TRD* and RICH at the same time!" << endl;
     gSystem->Exit(1);
   }
-  if ((Enable::LFHCAL||Enable::EHCAL) and Enable::PLUGDOOR)
+  if ((Enable::EHCAL) and Enable::PLUGDOOR)
   {
     cout << "Can not enable *HCal and PLUGDOOR at the same time!" << endl;
     gSystem->Exit(1);

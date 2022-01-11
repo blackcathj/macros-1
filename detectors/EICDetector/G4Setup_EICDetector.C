@@ -183,7 +183,7 @@ int G4Setup()
 
   PHG4Reco *g4Reco = new PHG4Reco();
 
-//  g4Reco->setDisableUserActions(); // speed up dose simulation
+  g4Reco->setDisableUserActions(); // speed up dose simulation
 
   WorldInit(g4Reco);
 

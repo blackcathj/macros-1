@@ -308,7 +308,7 @@ int Fun4All_G4_EICDetector(
 //  Enable::DSTOUT_COMPRESS = true;  // Compress DST files
 
   //Option to convert DST to human command readable TTree for quick poke around the outputs
-  Enable::DSTREADER = true;
+  // Enable::DSTREADER = true;
 
   // turn the display on (default off)
   //  Enable::DISPLAY = true;
@@ -321,104 +321,104 @@ int Fun4All_G4_EICDetector(
   //  Enable::OVERLAPCHECK = true;
   //  Enable::VERBOSITY = 1;
 
-//  // whether to simulate the Be section of the beam pipe
-//  Enable::PIPE = true;
-//  // If need to disable EIC beam pipe extension beyond the Be-section:
-//  G4PIPE::use_forward_pipes = true;
-//  //EIC hadron far forward magnets and detectors. IP6 and IP8 are incompatible (pick either or);
-////  Enable::HFARFWD_MAGNETS = true;
-////  Enable::HFARFWD_VIRTUAL_DETECTORS = true;
-//
-////  Enable::HFARBWD_MAGNETS = true;
-////  Enable::HFARBWD_VIRTUAL_DETECTORS = true;
-//
-//  // gems
-//  Enable::EGEM = false;
-//  Enable::FGEM = false; // deactivated as it's replaced by a FTTL layer
-//  // Enable::BGEM = true; // not yet defined in this model
-//  Enable::RWELL = true;
-//  // barrel tracker
-//  Enable::TrackingService = true;
-//  // Enable::TrackingService_VERBOSITY = INT_MAX - 10;
-//  Enable::BARREL = true;
-//  // fst
-//  Enable::FST = true;
-//
-//  //AC-LGAD  TOFs
-//  Enable::FTTL = true;
-//  Enable::ETTL = true;
-//  Enable::CTTL = true;
-//
-//  //mRPC TOFs
-//  Enable::BTOF = false;
-//  Enable::ETOF = false;
-//  Enable::HTOF = false;
-//  Enable::ETOF_GAS = Enable::ETOF && true;
-//  Enable::HTOF_GAS = Enable::HTOF && true;
-//
-////  Enable::TRACKING = true;
-////  Enable::TRACKING_EVAL = Enable::TRACKING && true;
-//  G4TRACKING::DISPLACED_VERTEX = true;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
-//                                        // projections to calorimeters
-//  G4TRACKING::PROJECTION_EEMC = true;
-//  G4TRACKING::PROJECTION_BECAL = true;
-//  G4TRACKING::PROJECTION_EHCAL = true;
-//  G4TRACKING::PROJECTION_CEMC = true;
-//  G4TRACKING::PROJECTION_HCALIN = true;
-//  G4TRACKING::PROJECTION_HCALOUT = true;
-//  G4TRACKING::PROJECTION_FEMC = true;
-//  G4TRACKING::PROJECTION_FHCAL = true;
-//  G4TRACKING::PROJECTION_LFHCAL = true;
-//
-//  // enable barrel calos & magnet
-//  Enable::BECAL   = true;
-//  Enable::HCALIN  = true;
-//  Enable::MAGNET  = true;
-//  Enable::HCALOUT = true;
-//
-//  // EICDetector geometry - barrel
-//  Enable::DIRC = true;
-////  Enable::DIRC_RECO = Enable::DIRC && true;
-//
-//  Enable::BMMG = false;
-//  // Enable::DIRC_VERBOSITY = 2;
-//
-//  // EICDetector geometry - 'hadron' direction
-//  Enable::RICH = true;
-////  Enable::RICH_RECO = Enable::RICH && true;
-//
-//  Enable::TRD = false;
-//  Enable::TRD_GAS = false;
-//  // Enable::RICH_VERBOSITY = 2;
-//
-//
-//  // enable forward calos
-//  Enable::FEMC    = true;
-//  Enable::DRCALO  = false;
-//  Enable::LFHCAL  = true;
-//
-//  // EICDetector geometry - 'electron' direction
-//  Enable::mRICH = true;
-////  Enable::mRICH_RECO = Enable::mRICH && true;
-//  // Enable::mRICH_VERBOSITY = 2;
-//
-//  // EICDetector geometry - 'electron' direction
-//  Enable::EEMCH   = true;
-//  G4EEMCH::SETTING::USECUSTOMMAPUPDATED = true; // enable proper carbon structure
-//  G4TTL::SETTING::optionEEMCH           = Enable::EEMCH && true;
-//  Enable::EHCAL   = false;
-//
-////  Enable::FFR_EVAL = Enable::HFARFWD_MAGNETS && Enable::HFARFWD_VIRTUAL_DETECTORS && true;
-//
-//  Enable::PLUGDOOR = false;
-//
-//  // Other options
-////  Enable::GLOBAL_RECO = G4TRACKING::DISPLACED_VERTEX;  // use reco vertex for global event vertex
-////  Enable::GLOBAL_FASTSIM = true;
-//
-//  // jet reconstruction
-////  Enable::FWDJETS = true;
-//  Enable::FWDJETS_EVAL = Enable::FWDJETS && false;
+  // whether to simulate the Be section of the beam pipe
+  Enable::PIPE = true;
+  // If need to disable EIC beam pipe extension beyond the Be-section:
+  G4PIPE::use_forward_pipes = true;
+  //EIC hadron far forward magnets and detectors. IP6 and IP8 are incompatible (pick either or);
+//  Enable::HFARFWD_MAGNETS = true;
+//  Enable::HFARFWD_VIRTUAL_DETECTORS = true;
+
+//  Enable::HFARBWD_MAGNETS = true;
+//  Enable::HFARBWD_VIRTUAL_DETECTORS = true;
+
+  // gems
+  Enable::EGEM = false;
+  Enable::FGEM = false; // deactivated as it's replaced by a FTTL layer
+  // Enable::BGEM = true; // not yet defined in this model
+  Enable::RWELL = true;
+  // barrel tracker
+  Enable::TrackingService = true;
+  // Enable::TrackingService_VERBOSITY = INT_MAX - 10;
+  Enable::BARREL = true;
+  // fst
+  Enable::FST = true;
+
+  //AC-LGAD  TOFs
+  Enable::FTTL = true;
+  Enable::ETTL = true;
+  Enable::CTTL = true;
+
+  //mRPC TOFs
+  Enable::BTOF = false;
+  Enable::ETOF = false;
+  Enable::HTOF = false;
+  Enable::ETOF_GAS = Enable::ETOF && true;
+  Enable::HTOF_GAS = Enable::HTOF && true;
+
+//  Enable::TRACKING = true;
+//  Enable::TRACKING_EVAL = Enable::TRACKING && true;
+  G4TRACKING::DISPLACED_VERTEX = true;  // this option exclude vertex in the track fitting and use RAVE to reconstruct primary and 2ndary vertexes
+                                        // projections to calorimeters
+  G4TRACKING::PROJECTION_EEMC = true;
+  G4TRACKING::PROJECTION_BECAL = true;
+  G4TRACKING::PROJECTION_EHCAL = true;
+  G4TRACKING::PROJECTION_CEMC = true;
+  G4TRACKING::PROJECTION_HCALIN = true;
+  G4TRACKING::PROJECTION_HCALOUT = true;
+  G4TRACKING::PROJECTION_FEMC = true;
+  G4TRACKING::PROJECTION_FHCAL = true;
+  G4TRACKING::PROJECTION_LFHCAL = true;
+
+  // enable barrel calos & magnet
+  Enable::BECAL   = true;
+  Enable::HCALIN  = true;
+  Enable::MAGNET  = true;
+  Enable::HCALOUT = true;
+
+  // EICDetector geometry - barrel
+  Enable::DIRC = true;
+//  Enable::DIRC_RECO = Enable::DIRC && true;
+
+  Enable::BMMG = false;
+  // Enable::DIRC_VERBOSITY = 2;
+
+  // EICDetector geometry - 'hadron' direction
+  // Enable::RICH = true;
+//  Enable::RICH_RECO = Enable::RICH && true;
+
+  Enable::TRD = false;
+  Enable::TRD_GAS = false;
+  // Enable::RICH_VERBOSITY = 2;
+
+
+  // enable forward calos
+  Enable::FEMC    = true;
+  Enable::DRCALO  = false;
+  Enable::LFHCAL  = true;
+
+  // EICDetector geometry - 'electron' direction
+  Enable::mRICH = true;
+//  Enable::mRICH_RECO = Enable::mRICH && true;
+  // Enable::mRICH_VERBOSITY = 2;
+
+  // EICDetector geometry - 'electron' direction
+  Enable::EEMCH   = true;
+  G4EEMCH::SETTING::USECUSTOMMAPUPDATED = true; // enable proper carbon structure
+  G4TTL::SETTING::optionEEMCH           = Enable::EEMCH && true;
+  Enable::EHCAL   = false;
+
+//  Enable::FFR_EVAL = Enable::HFARFWD_MAGNETS && Enable::HFARFWD_VIRTUAL_DETECTORS && true;
+
+  Enable::PLUGDOOR = true;
+
+  // Other options
+//  Enable::GLOBAL_RECO = G4TRACKING::DISPLACED_VERTEX;  // use reco vertex for global event vertex
+//  Enable::GLOBAL_FASTSIM = true;
+
+  // jet reconstruction
+//  Enable::FWDJETS = true;
+  Enable::FWDJETS_EVAL = Enable::FWDJETS && false;
 
 
   // new settings using Enable namespace in GlobalVariables.C
@@ -508,7 +508,7 @@ int Fun4All_G4_EICDetector(
   //---------------
   // World Settings
   //---------------
-//    G4WORLD::PhysicsList = "FTFP_BERT_HP"; //FTFP_BERT_HP best for calo
+    G4WORLD::PhysicsList = "FTFP_BERT_HP"; //FTFP_BERT_HP best for calo
   //  G4WORLD::WorldMaterial = "G4_AIR"; // set to G4_GALACTIC for material scans
 
   //---------------

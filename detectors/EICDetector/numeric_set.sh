@@ -5,8 +5,8 @@ set basdir = '/phenix/u/jinhuang/links/sPHENIX_work/Fluence/';
 # set basdir = '/phenix/u/jinhuang/links/sPHENIX_work/EIC/DAQ';
 #set basdir = '/sphenix/user/jinhuang/HF-jet/event_gen/';
 # set basdir = '/direct/phenix+sim02/phnxreco/sPHENIX/sPHENIX_FHCAL/test';
-set Ntotal = 10000;
-set nSkip = 100;
+set Ntotal = 10;
+set nSkip = 1;
 
 mkdir -vp $basdir/$cfg/
 

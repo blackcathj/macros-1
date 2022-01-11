@@ -26,7 +26,8 @@
 R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
-    const int nEvents = 100,
+    const int nEvents = 10,
+    const int vertexID = 500,
     const int skip = 0,
     const string &inputFile = "phpythia8_BeamGas_MDC1.cfg",
     const string &outputFile = "G4EICDetector.root",
@@ -547,9 +548,25 @@ int Fun4All_G4_EICDetector(
     gSystem->Load("libg4testbench.so");
     // G4 scoring based flux analysis
 
+
+
     PHG4ScoringManager *g4score = new PHG4ScoringManager();
     g4score->setOutputFileName(string(outputFile) + "_g4score.root");
     g4score->Verbosity(1);
+
+
+
+    const double min_vertex = -500;
+    const double max_vertex = +500;
+    const int n_vertex_bin = 1000;
+    const double vertex_bin_size = (max_vertex - min_vertex)/n_vertex_bin;
+
+    const double min_vertexbin = min_vertex + vertex_bin_size *vertexID;
+    const double max_vertexbin = min_vertexbin + vertex_bin_size;
+    cout <<"Vertex range for PHG4ScoringManager : "<<min_vertexbin<<" - "<<max_vertexbin<<" @ vertexID = "<<vertexID<<endl;
+
+
+    g4score->setVertexAcceptanceRange( min_vertexbin , max_vertexbin);
 
 //    g4score->G4Command("/tracking/verbose 6");
 
@@ -813,7 +830,7 @@ int Fun4All_G4_EICDetector(
   }
 
   se->skip(skip);
-  se->run(nEvents);
+  se->run(nEvents, true);
 
   //-----
   // Exit

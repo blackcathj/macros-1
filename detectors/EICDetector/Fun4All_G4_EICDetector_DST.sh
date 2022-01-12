@@ -35,7 +35,7 @@ echo "Run"
 echo '########################################'
 
 
-root -l -b -q "Fun4All_G4_EICDetector.C(100, $idd)" ;
+root -l -b -q "Fun4All_G4_EICDetector.C(400, $idd)" ;
 cp -fv G4EICDetector.root_g4svtx_eval.root  ${src_data_file}_g4svtx_eval.root;
 cp -fv G4EICDetector.root_DSTReader.root  ${src_data_file}_DSTReader.root;
 cp -fv G4EICDetector.root_g4score.root  ${src_data_file}_g4score.root;

@@ -36,7 +36,7 @@ int Fun4All_G4_EICDetector(
   // Fun4All server
   //---------------
   Fun4AllServer *se = Fun4AllServer::instance();
-  se->Verbosity(0);
+  se->Verbosity(01);
   //Opt to print all random seed used for debugging reproducibility. Comment out to reduce stdout prints.
   //PHRandomSeed::Verbosity(1);
 
@@ -46,7 +46,7 @@ int Fun4All_G4_EICDetector(
   // PHRandomSeed() which reads /dev/urandom to get its seed
   // if the RANDOMSEED flag is set its value is taken as initial seed
   // which will produce identical results so you can debug your code
-  // rc->set_IntFlag("RANDOMSEED", 12345);
+   rc->set_IntFlag("RANDOMSEED", 12345);
 
   bool generate_seed = false;
 
@@ -144,7 +144,7 @@ int Fun4All_G4_EICDetector(
   // add the settings for other with [1], next with [2]...
   if (Input::SIMPLE)
   {
-    INPUTGENERATOR::SimpleEventGenerator[0]->add_particles("pi-", 5);
+    INPUTGENERATOR::SimpleEventGenerator[0]->add_particles("mu+", 1);
     if (Input::HEPMC || Input::EMBED)
     {
       INPUTGENERATOR::SimpleEventGenerator[0]->set_reuse_existing_vertex(true);
@@ -155,12 +155,12 @@ int Fun4All_G4_EICDetector(
       INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_function(PHG4SimpleEventGenerator::Uniform,
                                                                                 PHG4SimpleEventGenerator::Uniform,
                                                                                 PHG4SimpleEventGenerator::Uniform);
-      INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_mean(0., 0., 0.);
-      INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_width(0., 0., 5.);
+      INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_mean(0., 0., -0.1);
+      INPUTGENERATOR::SimpleEventGenerator[0]->set_vertex_distribution_width(0., 0., 0.);
     }
-    INPUTGENERATOR::SimpleEventGenerator[0]->set_eta_range(-3, 3);
-    INPUTGENERATOR::SimpleEventGenerator[0]->set_phi_range(-M_PI, M_PI);
-    INPUTGENERATOR::SimpleEventGenerator[0]->set_pt_range(0.1, 20.);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_eta_range(-.02, -.01);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_phi_range(0, 0.05);
+    INPUTGENERATOR::SimpleEventGenerator[0]->set_pt_range(5, 5.01);
   }
   // Upsilons
   // if you run more than one of these Input::UPSILON_NUMBER > 1
@@ -254,7 +254,7 @@ int Fun4All_G4_EICDetector(
   // Enable::DSTREADER = true;
 
   // turn the display on (default off)
-  //  Enable::DISPLAY = true;
+    Enable::DISPLAY = true;
 
   //======================
   // What to run
@@ -344,7 +344,7 @@ int Fun4All_G4_EICDetector(
   Enable::mRICH = true;
   Enable::mRICH_RECO = Enable::mRICH && true;
   // Enable::mRICH_VERBOSITY = 2;
-  
+
   // EICDetector geometry - 'electron' direction
   Enable::EEMCH   = true;
   G4EEMCH::SETTING::USECUSTOMMAPUPDATED = true; // enable proper carbon structure
@@ -378,7 +378,7 @@ int Fun4All_G4_EICDetector(
   // Enable::B0_FULLHITPLANE = true;
   // Enable::B0_VAR_PIPE_HOLE = true;
   // Enable::B0_CIRCLE_PIPE_HOLE = false;
-  
+
   // B0 Tracking
   // Enable::B0TRACKING = false; // For B0 Tracking
   // Enable::B0TRACKING_EVAL = Enable::B0TRACKING && true; //For B0 Tracking
@@ -390,7 +390,7 @@ int Fun4All_G4_EICDetector(
   // Enable::B0ECAL_TOWER = Enable::B0ECAL_CELL && true;
   // Enable::B0ECAL_CLUSTER = Enable::B0ECAL_TOWER && true;
   // Enable::B0ECAL_EVAL = Enable::B0ECAL_CLUSTER && true;
-    
+
   // RP
   // Enable::RP_DISABLE_HITPLANE = true;
   

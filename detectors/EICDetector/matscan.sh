@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file_base='data/Fun4All_G4_EICDetector_ECCE_Prop5_B_'
+file_base='data/Fun4All_G4_EICDetector_ECCE_Prop7_dRICHFix_B_'
 
 for i in {1..21}
 do

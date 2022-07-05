@@ -334,9 +334,9 @@ int Fun4All_G4_EICDetector(
   Enable::FST =  (nDetectors>4);
 
   // TOFs
-  Enable::FTTL =  (nDetectors>7);
-  Enable::ETTL =  (nDetectors>9);
-  Enable::CTTL =  (nDetectors>10);
+  Enable::FTTL =  (nDetectors>8);
+  Enable::ETTL =  (nDetectors>10);
+  Enable::CTTL =  (nDetectors>7);
 
   //mRPC TOFs
   Enable::BTOF = false;
@@ -387,7 +387,7 @@ int Fun4All_G4_EICDetector(
   // Enable::DIRC_VERBOSITY = 2;
 
   // EICDetector geometry - 'hadron' direction
-  Enable::RICH =  (nDetectors>8);
+  Enable::RICH =  (nDetectors>9);
   Enable::RICH_RECO = Enable::DIRC && false;
   // Enable::RICH_VERBOSITY = 2;
 

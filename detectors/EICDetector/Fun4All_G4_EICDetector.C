@@ -36,7 +36,7 @@ int Fun4All_G4_EICDetector(
   // Fun4All server
   //---------------
   Fun4AllServer *se = Fun4AllServer::instance();
-  se->Verbosity(01);
+  se->Verbosity(0);
   //Opt to print all random seed used for debugging reproducibility. Comment out to reduce stdout prints.
   //PHRandomSeed::Verbosity(1);
 
@@ -46,7 +46,7 @@ int Fun4All_G4_EICDetector(
   // PHRandomSeed() which reads /dev/urandom to get its seed
   // if the RANDOMSEED flag is set its value is taken as initial seed
   // which will produce identical results so you can debug your code
-   rc->set_IntFlag("RANDOMSEED", 1);
+  // rc->set_IntFlag("RANDOMSEED", 12345);
 
   bool generate_seed = false;
 
@@ -67,10 +67,37 @@ int Fun4All_G4_EICDetector(
   // switching IPs by comment/uncommenting the following lines
   // used for both beamline setting and for the event generator crossing boost
   Enable::IP6 = true;
-  // Enable::IP8 = true;
+  //Enable::IP8 = true;
+
+   
+  //===============
+  // The following Ion energy and electron energy setting needs to be speficied
+  // The setting options for e-p high divergence setting (p energy x e energy):
+  // Option: 275x18, 275x10, 100x10, 100x5, 41x5
+  //
+  // The setting options for e-p high divergence setting (p energy x e energy):
+  // Option: 275x18, 275x10, 100x10, 100x5, 41x5
+  //
+  // The setting options for e-p high divergence setting (A energy x e energy):
+  // Option: 110x18, 110x10, 110x5, 41x5
 
   // Setting proton beam pipe energy. If you don't know what to set here, leave it at 275
   Enable::HFARFWD_ION_ENERGY = 275;
+
+  // Setting electron beam pipe energy. If you don't know what to set here, leave it at 18
+  Enable::HFARBWD_E_ENERGY = 18;
+
+  // Beam Scattering configuration setting specified by CDR
+  //
+  // Option 1: ep-high-acceptance
+  // Option 2: ep-high-divergence
+  // Option 3: eA
+  //
+  // Enable::BEAM_COLLISION_SETTING = "ep-high-divergence";
+  // If you don't know what to put here, set it to ep-high-divergence   
+  //
+  // Enable::BEAM_COLLISION_SETTING = "eA";
+  Enable::BEAM_COLLISION_SETTING = "ep-high-divergence";
 
   // Either:
   // read previously generated g4-hits files, in this case it opens a DST and skips
@@ -93,8 +120,7 @@ int Fun4All_G4_EICDetector(
   //INPUTEMBED::listfile[0] = embed_input_file;
 
   // Use Pythia 8
-  Input::PYTHIA8 = true;
-  PYTHIA8::config_file = "./phpythia8_ep.cfg";
+  // Input::PYTHIA8 = true;
 
   // Use Pythia 6
   // Input::PYTHIA6 = true;
@@ -103,7 +129,7 @@ int Fun4All_G4_EICDetector(
   //   Input::SARTRE = true;
 
   // Simple multi particle generator in eta/phi/pt ranges
-  // Input::SIMPLE = true;
+  Input::SIMPLE = true;
   // Input::SIMPLE_NUMBER = 2; // if you need 2 of them
   // Input::SIMPLE_VERBOSITY = 1;
 
@@ -111,6 +137,9 @@ int Fun4All_G4_EICDetector(
   // Input::GUN = true;
   // Input::GUN_NUMBER = 3; // if you need 3 of them
   // Input::GUN_VERBOSITY = 0;
+
+  // Particle ion gun
+  // Input::IONGUN = true; 
 
   // Upsilon generator
   // Input::UPSILON = true;
@@ -184,6 +213,20 @@ int Fun4All_G4_EICDetector(
     INPUTGENERATOR::Gun[0]->AddParticle("pi-", 0, 1, 0);
     INPUTGENERATOR::Gun[0]->set_vtx(0, 0, 0);
   }
+
+  if (Input::IONGUN)
+   {
+     float theta = -25e-3;
+ 
+     INPUTGENERATOR::IonGun[0]->SetA(197);
+     INPUTGENERATOR::IonGun[0]->SetZ(79);
+     INPUTGENERATOR::IonGun[0]->SetCharge(79);
+     INPUTGENERATOR::IonGun[0]->SetMom(sin(theta)*110*197, 0,cos(theta)*110*197); // -25 mrad                        
+
+     INPUTGENERATOR::IonGun[0]->Print();
+
+   }
+
   // pythia6
   if (Input::PYTHIA6)
   {
@@ -252,7 +295,7 @@ int Fun4All_G4_EICDetector(
   // Enable::DSTREADER = true;
 
   // turn the display on (default off)
-    Enable::DISPLAY = true;
+  // Enable::DISPLAY = true;
 
   //======================
   // What to run
@@ -270,12 +313,12 @@ int Fun4All_G4_EICDetector(
   Enable::HFARFWD_MAGNETS = true;
   Enable::HFARFWD_VIRTUAL_DETECTORS = true;
 
-//  Enable::HFARBWD_MAGNETS = true;
-//  Enable::HFARBWD_VIRTUAL_DETECTORS = true;
+  Enable::HFARBWD_MAGNETS = true;
+  Enable::HFARBWD_VIRTUAL_DETECTORS = true;
 
   // gems
-//  Enable::EGEM = true;
-//  Enable::FGEM = true; // deactivated as it's replaced by a FTTL layer
+  Enable::EGEM = false;
+  Enable::FGEM = false; // deactivated as it's replaced by a FTTL layer
   // Enable::BGEM = true; // not yet defined in this model
   Enable::RWELL = true;
   // barrel tracker
@@ -311,27 +354,11 @@ int Fun4All_G4_EICDetector(
   G4TRACKING::PROJECTION_FHCAL = true;
   G4TRACKING::PROJECTION_LFHCAL = true;
 
-  Enable::BECAL = true;
-  Enable::BECAL_CELL = Enable::BECAL && true;
-  Enable::BECAL_TOWER = Enable::BECAL_CELL && true;
-  Enable::BECAL_CLUSTER = Enable::BECAL_TOWER && true;
-  Enable::BECAL_EVAL = Enable::BECAL_CLUSTER && true;
-
-  Enable::HCALIN = true;
-  //  Enable::HCALIN_ABSORBER = true;
-  Enable::HCALIN_CELL = Enable::HCALIN && true;
-  Enable::HCALIN_TOWER = Enable::HCALIN_CELL && true;
-  Enable::HCALIN_CLUSTER = Enable::HCALIN_TOWER && true;
-//  Enable::HCALIN_EVAL = Enable::HCALIN_CLUSTER && true;
-
-  Enable::MAGNET = true;
-
+  // enable barrel calos & magnet
+  Enable::BECAL   = true;
+  Enable::HCALIN  = true;
+  Enable::MAGNET  = true;
   Enable::HCALOUT = true;
-  //  Enable::HCALOUT_ABSORBER = true;
-  Enable::HCALOUT_CELL = Enable::HCALOUT && true;
-  Enable::HCALOUT_TOWER = Enable::HCALOUT_CELL && true;
-  Enable::HCALOUT_CLUSTER = Enable::HCALOUT_TOWER && true;
-  Enable::HCALOUT_EVAL = Enable::HCALOUT_CLUSTER && true;
 
   // EICDetector geometry - barrel
   Enable::DIRC = true;
@@ -348,45 +375,26 @@ int Fun4All_G4_EICDetector(
   Enable::TRD_GAS = false;
   // Enable::RICH_VERBOSITY = 2;
 
+
+  // enable forward calos
+  Enable::FEMC    = true;
+  Enable::DRCALO  = false;
+  Enable::LFHCAL  = true;
+
   // EICDetector geometry - 'electron' direction
   Enable::mRICH = true;
   Enable::mRICH_RECO = Enable::mRICH && true;
   // Enable::mRICH_VERBOSITY = 2;
-
-  Enable::FEMC = true;
-  //  Enable::FEMC_ABSORBER = true;
-  Enable::FEMC_TOWER = Enable::FEMC && true;
-  Enable::FEMC_CLUSTER = Enable::FEMC_TOWER && true;
-//  Enable::FEMC_EVAL = Enable::FEMC_CLUSTER && true;
-
-  //Enable::DRCALO = false;
-  Enable::DRCALO_CELL = Enable::DRCALO && true;
-  Enable::DRCALO_TOWER = Enable::DRCALO_CELL && true;
-  Enable::DRCALO_CLUSTER = Enable::DRCALO_TOWER && true;
-//  Enable::DRCALO_EVAL = Enable::DRCALO_CLUSTER && false;
-
-  Enable::LFHCAL = true;
-  Enable::LFHCAL_ABSORBER = false;
-  Enable::LFHCAL_CELL = Enable::LFHCAL && true;
-  Enable::LFHCAL_TOWER = Enable::LFHCAL_CELL && true;
-  Enable::LFHCAL_CLUSTER = Enable::LFHCAL_TOWER && true;
-//  Enable::LFHCAL_EVAL = Enable::LFHCAL_CLUSTER && true;
-
+  
   // EICDetector geometry - 'electron' direction
-  Enable::EEMCH = true;
-  Enable::EEMCH_TOWER = Enable::EEMCH && true;
-  Enable::EEMCH_CLUSTER = Enable::EEMCH_TOWER && true;
-//  Enable::EEMCH_EVAL = Enable::EEMCH_CLUSTER && true;
-
-//  Enable::EHCAL = true;
-//  Enable::EHCAL_CELL = Enable::EHCAL && true;
-//  Enable::EHCAL_TOWER = Enable::EHCAL_CELL && true;
-//  Enable::EHCAL_CLUSTER = Enable::EHCAL_TOWER && true;
-//  Enable::EHCAL_EVAL = Enable::EHCAL_CLUSTER && true;
+  Enable::EEMCH   = true;
+  G4EEMCH::SETTING::USECUSTOMMAPUPDATED = true; // enable proper carbon structure
+  G4TTL::SETTING::optionEEMCH           = Enable::EEMCH && true;
+  Enable::EHCAL   = false;
 
   Enable::FFR_EVAL = Enable::HFARFWD_MAGNETS && Enable::HFARFWD_VIRTUAL_DETECTORS && true;
 
-  Enable::PLUGDOOR = true;
+  Enable::PLUGDOOR = false;
 
   // Other options
   Enable::GLOBAL_RECO = G4TRACKING::DISPLACED_VERTEX;  // use reco vertex for global event vertex
@@ -402,33 +410,92 @@ int Fun4All_G4_EICDetector(
   //BlackHoleGeometry::visible = true;
 
   // ZDC
-//   Enable::ZDC = true;
-   Enable::ZDC_DISABLE_BLACKHOLE = true;
+  // Enable::ZDC = true;
+  // Enable::ZDC_DISABLE_BLACKHOLE = true;
 
   // B0
-   Enable::B0_DISABLE_HITPLANE = true;
-   Enable::B0_FULLHITPLANE = true;
+  // B0 shape
+  // Enable::B0_DISABLE_HITPLANE = true;
+  // Enable::B0_FULLHITPLANE = true;
+  // Enable::B0_VAR_PIPE_HOLE = true;
+  // Enable::B0_CIRCLE_PIPE_HOLE = false;
+  
+  // B0 Tracking
+  // Enable::B0TRACKING = false; // For B0 Tracking
+  // Enable::B0TRACKING_EVAL = Enable::B0TRACKING && true; //For B0 Tracking
 
-   Enable::B0ECALTOWERS = true;  //To Construct Towers of B0ECal instead of one single volume
-   Enable::B0ECAL = Enable::B0_DISABLE_HITPLANE && true;
-   Enable::B0ECAL_CELL = Enable::B0ECAL && true;
-   Enable::B0ECAL_TOWER = Enable::B0ECAL_CELL && true;
-   Enable::B0ECAL_CLUSTER = Enable::B0ECAL_TOWER && true;
-//   Enable::B0ECAL_EVAL = Enable::B0ECAL_CLUSTER && true;
+  // B0 ECAL
+  // Enable::B0ECALTOWERS = true;  //To Construct Towers of B0ECal instead of one single volume
+  // Enable::B0ECAL = Enable::B0_DISABLE_HITPLANE && true;
+  // Enable::B0ECAL_CELL = Enable::B0ECAL && true;
+  // Enable::B0ECAL_TOWER = Enable::B0ECAL_CELL && true;
+  // Enable::B0ECAL_CLUSTER = Enable::B0ECAL_TOWER && true;
+  // Enable::B0ECAL_EVAL = Enable::B0ECAL_CLUSTER && true;
     
   // RP
-   Enable::RP_DISABLE_HITPLANE = true;
-   Enable::RP_FULLHITPLANE = true;
+  // Enable::RP_DISABLE_HITPLANE = true;
+   
+   //Far Backward detectors
+//  Enable::BWD = true;
+//  Enable::BWDN[0]=true; // 1st Q2 tagger
+//  Enable::BWDN[1]=true; // 2nd Q2 tagger
+//  Enable::BWDN[2]=true; // 1st Lumi
+//  Enable::BWDN[3]=true; // 2nd Lumi (+)
+//  Enable::BWDN[4]=true; // 3rd Lumi (-)
+//  Enable::BWD_CELL = Enable::BWD && true;
+//  Enable::BWD_TOWER = Enable::BWD_CELL && true;
+//  Enable::BWD_CLUSTER = Enable::BWD_TOWER && true;
+//  Enable::BWD_EVAL = Enable::BWD_CLUSTER && true;
 
-  // RP after 2nd focus for IP8 only
-   Enable::RP2nd_DISABLE_HITPLANE = true;
-   Enable::RP2nd_FULLHITPLANE = true;
+  //************************************************************
+  // details for calos: cells, towers, clusters
+  //************************************************************
+  Enable::BECAL_CELL    = Enable::BECAL && true;
+  Enable::BECAL_TOWER   = Enable::BECAL_CELL && true;
+  Enable::BECAL_CLUSTER = Enable::BECAL_TOWER && true;
+  Enable::BECAL_EVAL    = Enable::BECAL_CLUSTER && true;
 
+  //  Enable::HCALIN_ABSORBER = true;
+  Enable::HCALIN_CELL     = Enable::HCALIN && true;
+  Enable::HCALIN_TOWER    = Enable::HCALIN_CELL && true;
+  Enable::HCALIN_CLUSTER  = Enable::HCALIN_TOWER && true;
+  Enable::HCALIN_EVAL     = Enable::HCALIN_CLUSTER && true;
+
+  //  Enable::HCALOUT_ABSORBER = true;
+  Enable::HCALOUT_CELL    = Enable::HCALOUT && true;
+  Enable::HCALOUT_TOWER   = Enable::HCALOUT_CELL && true;
+  Enable::HCALOUT_CLUSTER = Enable::HCALOUT_TOWER && true;
+  Enable::HCALOUT_EVAL    = Enable::HCALOUT_CLUSTER && true;
+  
+  //  Enable::FEMC_ABSORBER = true;
+  Enable::FEMC_TOWER      = Enable::FEMC && true;
+  Enable::FEMC_CLUSTER    = Enable::FEMC_TOWER && true;
+  Enable::FEMC_EVAL       = Enable::FEMC_CLUSTER && true;
+  
+  Enable::DRCALO_CELL     = Enable::DRCALO && true;
+  Enable::DRCALO_TOWER    = Enable::DRCALO_CELL && true;
+  Enable::DRCALO_CLUSTER  = Enable::DRCALO_TOWER && true;
+  Enable::DRCALO_EVAL     = Enable::DRCALO_CLUSTER && false;
+
+  Enable::LFHCAL_ABSORBER = false;
+  Enable::LFHCAL_CELL     = Enable::LFHCAL && true;
+  Enable::LFHCAL_TOWER    = Enable::LFHCAL_CELL && true;
+  Enable::LFHCAL_CLUSTER  = Enable::LFHCAL_TOWER && true;
+  Enable::LFHCAL_EVAL     = Enable::LFHCAL_CLUSTER && true;
+
+  Enable::EEMCH_TOWER     = Enable::EEMCH && true;
+  Enable::EEMCH_CLUSTER   = Enable::EEMCH_TOWER && true;
+  Enable::EEMCH_EVAL      = Enable::EEMCH_CLUSTER && true;
+
+  Enable::EHCAL_CELL      = Enable::EHCAL && true;
+  Enable::EHCAL_TOWER     = Enable::EHCAL_CELL && true;
+  Enable::EHCAL_CLUSTER   = Enable::EHCAL_TOWER && true;
+  Enable::EHCAL_EVAL      = Enable::EHCAL_CLUSTER && true;
+  
   // Enabling the event evaluator?
-  Enable::EVENT_EVAL = false;
-  // EVENT_EVALUATOR::Verbosity = 1;
-  // EVENT_EVALUATOR::EnergyThreshold = 0.05; // GeV
-  Enable::EVENT_EVAL_DO_HEPMC = Input::PYTHIA6 or Input::PYTHIA8 or Input::SARTRE or Input::HEPMC or Input::READEIC;
+  Enable::EVENT_EVAL            = true;
+  Enable::EVENT_EVAL_DO_HITS    = true;
+  Enable::EVENT_EVAL_DO_HEPMC   = Input::PYTHIA6 or Input::PYTHIA8 or Input::SARTRE or Input::HEPMC or Input::READEIC;
   Enable::EVENT_EVAL_DO_EVT_LVL = Input::PYTHIA6 or Input::PYTHIA8 or Input::READEIC;
 
   //Enable::USER = true;
@@ -438,6 +505,7 @@ int Fun4All_G4_EICDetector(
   //---------------
   //  G4WORLD::PhysicsList = "FTFP_BERT"; //FTFP_BERT_HP best for calo
   //  G4WORLD::WorldMaterial = "G4_AIR"; // set to G4_GALACTIC for material scans
+  //  G4WORLD::WorldMaterial = "G4_Galactic"; // set to G4_GALACTIC for material scans
 
   //---------------
   // Magnet Settings
@@ -524,6 +592,9 @@ int Fun4All_G4_EICDetector(
     
   if (Enable::B0ECAL_TOWER) B0ECAL_Towers(); // For B0Ecal
   if (Enable::B0ECAL_CLUSTER) B0ECAL_Clusters(); //For B0Ecal
+    
+  if (Enable::BWD_TOWER) BWD_Towers(); // For Bwd
+  if (Enable::BWD_CLUSTER) BWD_Clusters(); //For Bwd
 
   if (Enable::DSTOUT_COMPRESS) ShowerCompress();
 
@@ -591,6 +662,8 @@ int Fun4All_G4_EICDetector(
   if (Enable::FFR_EVAL) FFR_Eval(outputroot + "_g4ffr_eval.root");
 
   if (Enable::B0ECAL_EVAL) B0ECAL_Eval(outputroot + "_g4b0ecal_eval_test.root"); // For B0Ecal
+    
+  if (Enable::BWD_EVAL) BWD_Eval(outputroot + "_g4bwd_eval_e0100_debug"); // For Bwd
     
   if (Enable::FWDJETS_EVAL) Jet_FwdEval();
 

@@ -22,6 +22,9 @@
 
 #include <RooUnblindPrecision.h>
 
+#include <synradana/ReadSynRadFiles.h>
+R__LOAD_LIBRARY(libSynRadAna.so)
+
 R__LOAD_LIBRARY(libfun4all.so)
 
 int Fun4All_G4_EICDetector(
@@ -46,7 +49,7 @@ int Fun4All_G4_EICDetector(
   // PHRandomSeed() which reads /dev/urandom to get its seed
   // if the RANDOMSEED flag is set its value is taken as initial seed
   // which will produce identical results so you can debug your code
-  // rc->set_IntFlag("RANDOMSEED", 12345);
+  rc->set_IntFlag("RANDOMSEED", 12345);
 
   bool generate_seed = false;
 
@@ -120,7 +123,8 @@ int Fun4All_G4_EICDetector(
   //INPUTEMBED::listfile[0] = embed_input_file;
 
   // Use Pythia 8
-  // Input::PYTHIA8 = true;
+  Input::PYTHIA8 = true;
+  PYTHIA8::config_file = "./phpythia8_ep.cfg";
 
   // Use Pythia 6
   // Input::PYTHIA6 = true;
@@ -129,7 +133,7 @@ int Fun4All_G4_EICDetector(
   //   Input::SARTRE = true;
 
   // Simple multi particle generator in eta/phi/pt ranges
-  Input::SIMPLE = true;
+  // Input::SIMPLE = true;
   // Input::SIMPLE_NUMBER = 2; // if you need 2 of them
   // Input::SIMPLE_VERBOSITY = 1;
 
@@ -268,6 +272,30 @@ int Fun4All_G4_EICDetector(
     //INPUTMANAGER::HepMCInputManager->set_embedding_id(2);
   }
 
+  {
+    Fun4AllHepMCInputManager *HepMCInputManager = new Fun4AllHepMCInputManager("PileUp");
+    HepMCInputManager->set_embedding_id(-1);
+    Input::ApplyEICBeamParameter(HepMCInputManager);
+    se->registerInputManager(HepMCInputManager);
+    HepMCInputManager->fileopen("data/phpythia8_ep_MB_hepmc.dat.gz");
+  }
+  {
+    Fun4AllHepMCInputManager *HepMCInputManager = new Fun4AllHepMCInputManager("BeamGas");
+    HepMCInputManager->set_embedding_id(-2);
+    HepMCInputManager->set_vertex_distribution_mean(4.5*25e-3, 0, -4.5, 0);
+    se->registerInputManager(HepMCInputManager);
+    HepMCInputManager->fileopen("data/phpythia8_BeamGas_MDC1_hepmc.dat.gz");
+  }
+
+//  {
+//    ReadSynRadFiles *eicr = new ReadSynRadFiles();
+//    eicr->OpenInputFile("data/Particle log facet 18952 +4.5m.csv");
+//    eicr->SetEntryPerEvent(10);
+//    //  eicr->Verbosity(1);
+//    se->registerSubsystem(eicr);
+//
+//  }
+
   // register all input generators with Fun4All
   InputRegister();
 
@@ -295,7 +323,7 @@ int Fun4All_G4_EICDetector(
   // Enable::DSTREADER = true;
 
   // turn the display on (default off)
-  // Enable::DISPLAY = true;
+//  Enable::DISPLAY = true;
 
   //======================
   // What to run
@@ -310,11 +338,11 @@ int Fun4All_G4_EICDetector(
   // If need to disable EIC beam pipe extension beyond the Be-section:
   G4PIPE::use_forward_pipes = true;
   //EIC hadron far forward magnets and detectors. IP6 and IP8 are incompatible (pick either or);
-  Enable::HFARFWD_MAGNETS = true;
-  Enable::HFARFWD_VIRTUAL_DETECTORS = true;
+  Enable::HFARFWD_MAGNETS = false;
+  Enable::HFARFWD_VIRTUAL_DETECTORS = false;
 
-  Enable::HFARBWD_MAGNETS = true;
-  Enable::HFARBWD_VIRTUAL_DETECTORS = true;
+  Enable::HFARBWD_MAGNETS = false;
+  Enable::HFARBWD_VIRTUAL_DETECTORS = false;
 
   // gems
   Enable::EGEM = false;

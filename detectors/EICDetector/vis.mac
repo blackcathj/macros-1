@@ -30,7 +30,8 @@
 /vis/viewer/set/background white
 # increase display limit for more complex detectors
 /vis/ogl/set/displayListLimit 500000
-/vis/viewer/set/viewpointThetaPhi 240 -40
+/vis/viewer/set/viewpointThetaPhi 240 -100
+/vis/viewer/set/upThetaPhi 90 0
 /vis/viewer/addCutawayPlane 0 0 0 m 0 -1 0
 /vis/viewer/addCutawayPlane 0 0 0 m -1 -1 
 # /vis/scene/add/magneticField
